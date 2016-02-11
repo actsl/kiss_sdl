@@ -19,7 +19,7 @@ toolkits don't enable you to do many things that you want, due to their
 restricted internal design.
 
 This toolkit uses an original innovative approach for a widget toolkit,
-this new apprach enabled to make the widget toolkit very simple, and
+this new approach enabled to make the widget toolkit very simple, and
 simpler than widget toolkits previously written. The toolkit is written
 in C, but can also be used in C++.
 
