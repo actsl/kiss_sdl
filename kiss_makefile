@@ -1,0 +1,22 @@
+C = gcc
+#LDFLAGS = -LC:\SDL2-2.0.4\i686-w64-mingw32\lib -LC:\SDL2_ttf-2.0.14\i686-w64-mingw32\lib -LC:\SDL2_image-2.0.1\i686-w64-mingw32\lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
+#CFLAGS = -IC:\SDL2-2.0.4\include -IC:\SDL2-2.0.4\i686-w64-mingw32\include -IC:\SDL2_ttf-2.0.14\i686-w64-mingw32\include -IC:\SDL2_image-2.0.1\i686-w64-mingw32\include -Wall -c -std=c89
+#EXE = kiss_example.exe
+LDFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf
+CFLAGS = -Wall -c -std=c89
+EXE = kiss_example
+
+all: $(EXE)
+
+$(EXE): kiss_example.o kiss_sdl.o
+	$(C) $^ $(LDFLAGS) -o $@
+
+kiss_example.o: kiss_example.c
+	$(C) $(CFLAGS) $^ -o $@
+
+kiss_sdl.o: kiss_sdl.c
+	$(C) $(CFLAGS) $^ -o $@
+
+clean:
+	rm *.o && rm $(EXE)
+ 
