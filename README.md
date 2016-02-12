@@ -69,7 +69,7 @@ widgets have coordinates relative to the main window, but it is possible
 and not so difficult, to add the coordinates of a local window to a
 certain group of widgets. It is possible to create and free such group
 of widgets in one function, or process its events or draw it in one
-function. The draw function of every widget also has a third argument,
+function. The draw function of every widget also has a third argument which,
 if provided, makes the widget to become visible when the window widget
 pointed by that argument becomes visible, and not visible when that window
 becomes not visible. That window is thus like a dialog window on which
@@ -109,7 +109,7 @@ Can i use other colors, textures, etc? Yes. To use certain other fonts
 or textures, you may have to rewrite the init function, or write your
 own widgets. You can also draw anything you like on the widgets in the
 drawing function, this will be automatically redrawn every time after
-the window were exposed.
+the window is exposed.
 
 Can i do this or that other thing? You can do whatever you want,
 different from some other widget toolkits, this toolkit has not been made
@@ -123,7 +123,7 @@ INSTALL
 =======
 
 To maintain simplicity, no library has been made. To use it, copy
-all files to your project's directory and compile with your code. The
+all files to your project's directory and compile them with your code. The
 kiss_makefile compiles the example that implements a file selection
 diolog, and shows all the widgets in the toolkit. The makefile was
 made for Linux, to use it in Windows, edit the makefile, comment the
@@ -132,13 +132,13 @@ Windows. Then change the paths to the directories under the folders where
 you installed your SDL development libraries. The change may be simple,
 like only changing the version of the library from 2.0.4 to 2.0.6.
 
-The common way is to copy all dll-s from the proper bin directories of
+The common way in Windows is to copy all dll-s from the proper bin directories of
 SDL, SDL_image and SDL_ttf, to your project's directory, this is how SDL
 programs are usually distributed. Or copy them to the Windows system
 directory, but then they may have to be replaced when using different
 versions of SDL.
 
-In Windows, this toolkit was tested with MinGW64, but MinGW32 should also
+In Windows, this toolkit was tested with MinGW64, MinGW32 should also
 work. The toolkit should also work with Visual C, though it was not tested
 with it. The example doesn't work with Visual C, because Visual C is not
 capable of POSIX. All the POSIX commands used are available though in
@@ -153,8 +153,6 @@ mingw32-make -f kiss_makefile
 
 SCREENSHOT
 ==========
-
-As long as this is available in the web site where it was uploaded.
 
 http://s24.postimg.org/pqhe1cw5x/ss2.jpg
 
