@@ -141,7 +141,7 @@ versions of SDL.
 In Windows, this toolkit was tested with MinGW64, MinGW32 should also
 work. The toolkit should also work with Visual C, though it was not tested
 with it. The example doesn't work with Visual C, because Visual C is not
-capable of POSIX. In Visual C use instead _getcwd and _chdir from direct.h,
+capable of POSIX. In Visual C one should use _getcwd and _chdir from direct.h,
 _stat32 or _stat64 instead of stat, and the dirent library  
 https://github.com/tronkko/dirent . Use one of the following commands to
 compile either in Linux or in Windows using MinGW.
