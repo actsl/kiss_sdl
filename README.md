@@ -125,7 +125,7 @@ INSTALL
 To maintain simplicity, no library has been made. To use it, copy
 all files to your project's directory and compile them with your code. The
 kiss_makefile compiles the example that implements a file selection
-diolog, and shows all the widgets in the toolkit. The makefile was
+dialog, and shows all the widgets in the toolkit. The makefile was
 made for Linux, to use it in Windows, edit the makefile, comment the
 LDFLAGS, CFLAGS and EXE, and uncomment the LDFLAGS, CFLAGS and EXE for
 Windows. Then change the paths to the directories under the folders where
