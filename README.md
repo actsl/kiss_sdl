@@ -160,7 +160,7 @@ https://raw.githubusercontent.com/actsl/kiss_sdl/master/kiss_ss2.jpg
 VERSION
 =======
 
-0.6.0
+0.6.2
 
 
 LICENSE
