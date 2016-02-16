@@ -154,7 +154,7 @@ mingw32-make -f kiss_makefile
 SCREENSHOT
 ==========
 
-https://raw.githubusercontent.com/actsl/kiss_sdl/master/kiss_ss2.jpg
+![](https://raw.githubusercontent.com/actsl/kiss_sdl/master/kiss_ss2.jpg)
 
 
 VERSION
