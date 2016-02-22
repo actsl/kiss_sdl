@@ -1,7 +1,7 @@
 NAME
 ====
 
-kiss_sdl - Simple universal GUI widget toolkit for SDL
+kiss_sdl - Simple universal GUI widget toolkit for SDL2
 
 
 DESCRIPTION
