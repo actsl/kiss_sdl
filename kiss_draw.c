@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.8.0
+  kiss_sdl version 0.8.2
 */
 
 #include "kiss_sdl.h"
@@ -159,6 +159,7 @@ SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h)
 	kiss_text_fontheight = TTF_FontHeight(kiss_textfont);
 	kiss_text_spacing = (int) kiss_spacing * kiss_text_fontheight;
 	kiss_text_lineheight = kiss_text_fontheight + kiss_text_spacing;
+	kiss_text_descent = 1 - TTF_FontDescent(kiss_textfont);
 	TTF_GlyphMetrics(kiss_textfont, 'W', NULL, NULL, NULL, NULL,
 		&kiss_text_advance);
 	kiss_buttonfont = TTF_OpenFont("kiss_font.ttf",

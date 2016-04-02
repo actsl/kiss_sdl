@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.8.0
+  kiss_sdl version 0.8.2
 */
 
 #include "kiss_sdl.h"
@@ -177,11 +177,13 @@ int main(int argc, char **argv)
 	kiss_selectbutton_new(&select1, &window,
 		label1.rect.x + combobox_width + kiss_vslider_width -
 		kiss_edge - kiss_selected_width, label1.rect.y +
-		kiss_text_lineheight - kiss_selected_height);
+		kiss_text_lineheight - kiss_selected_height -
+		kiss_text_descent);
 	kiss_label_new(&label2, &window, "Area", label1.rect.x,
 		label1.rect.y + 2 * kiss_text_lineheight);
 	kiss_selectbutton_new(&select2, &window, select1.rect.x,
-		label2.rect.y + kiss_text_lineheight - kiss_selected_height);
+		label2.rect.y + kiss_text_lineheight -
+		kiss_selected_height - kiss_text_descent);
 	kiss_combobox_new(&combobox, &window, "none", &a, label1.rect.x -
 		kiss_edge, label2.rect.y + 2 * kiss_text_lineheight,
 		combobox_width, combobox_height);

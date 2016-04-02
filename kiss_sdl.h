@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.8.0
+  kiss_sdl version 0.8.2
 */
 
 #ifndef _kiss_sdl_h
@@ -238,7 +238,7 @@ int kiss_text_spacing, kiss_text_lineheight, kiss_text_advance,
 	kiss_left_width, kiss_right_width, kiss_selected_width,
 	kiss_selected_height, kiss_click_interval, kiss_textfont_size,
 	kiss_buttonfont_size, kiss_progress_interval, kiss_slider_padding,
-	kiss_edge, kiss_border;
+	kiss_edge, kiss_border, kiss_text_descent;
 
 char *kiss_getcwd(char *buf, int size);
 int kiss_chdir(char *path);
