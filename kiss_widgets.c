@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.8.2
+  kiss_sdl version 0.8.4
 */
 
 #include "kiss_sdl.h"
@@ -530,13 +530,14 @@ int kiss_entry_new(kiss_entry *entry, kiss_window *wdw, int decorate,
 	entry->bg = kiss_white;
 	entry->normalcolor = kiss_black;
 	entry->activecolor = kiss_blue;
-	kiss_string_copy(entry->text, KISS_MAX_LENGTH, text, NULL);
+	entry->textwidth = w - 2 * kiss_border;
+	kiss_string_copy(entry->text, kiss_maxlength(TEXT_FONT,
+		entry->textwidth, text), text, NULL);
 	kiss_makerect(&entry->rect, x, y, w, kiss_text_fontheight +
 		2 * kiss_border);
 	entry->decorate = decorate;
 	entry->textx = x + kiss_border;
 	entry->texty = y + kiss_border;
-	entry->textwidth = w - 2 * kiss_border;
 	entry->active = 0;
 	entry->visible = 0;
 	entry->focus = 0;
@@ -708,7 +709,7 @@ int kiss_textbox_draw(kiss_textbox *textbox, SDL_Renderer *renderer)
 		kiss_string_copy(buf, kiss_maxlength(TEXT_FONT,
 			textbox->textwidth,
 			(char *) kiss_array_data(textbox->array,
-			textbox->firstline + i)) + 1,
+			textbox->firstline + i)),
 			(char *) kiss_array_data(textbox->array,
 			textbox->firstline + i), NULL);
 		kiss_rendertext(renderer, buf, textbox->textrect.x,
@@ -723,8 +724,8 @@ int kiss_combobox_new(kiss_combobox *combobox, kiss_window *wdw,
 	char *text, kiss_array *a, int x, int y, int w, int h)
 {
 	if (!combobox || !a || !text) return -1;
-	kiss_string_copy(combobox->text, KISS_MAX_LENGTH, text, NULL);
 	kiss_entry_new(&combobox->entry, wdw, 1, text, x, y, w);
+	strcpy(combobox->text, combobox->entry.text);
 	kiss_window_new(&combobox->window, NULL, 0, x,
 		y + combobox->entry.rect.h, w + kiss_vslider_width, h);
 	if (kiss_textbox_new(&combobox->textbox, &combobox->window, 1,
@@ -786,9 +787,12 @@ int kiss_combobox_event(kiss_combobox *combobox, SDL_Event *event, int *draw)
 		combobox->entry.focus = 0;
 		index = combobox->textbox.firstline +
 			combobox->textbox.selectedline;
-		strcpy(combobox->entry.text,
+		kiss_string_copy(combobox->entry.text,
+			kiss_maxlength(TEXT_FONT, combobox->entry.textwidth,
 			(char *) kiss_array_data(combobox->textbox.array,
-			index));
+			index)),
+			(char *) kiss_array_data(combobox->textbox.array,
+			index), NULL);
 		*draw = 1;
 		return 1;
 	}

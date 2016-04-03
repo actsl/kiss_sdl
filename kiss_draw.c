@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.8.2
+  kiss_sdl version 0.8.4
 */
 
 #include "kiss_sdl.h"
@@ -43,10 +43,11 @@ int kiss_maxlength(int ftype, int width, char *str)
 {
 	if (ftype == TEXT_FONT && width /
 		kiss_text_advance < KISS_MAX_LENGTH)
-		return width / kiss_text_advance;
+		/* Buffer length, text plus terminating '\0' */
+		return width / kiss_text_advance + 1;
 	else if (ftype == BUTTON_FONT && width /
 		kiss_button_advance < KISS_MAX_LENGTH)
-		return width / kiss_button_advance;
+		return width / kiss_button_advance + 1;
 	return -1;
 }
 

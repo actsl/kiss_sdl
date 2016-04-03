@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.8.2
+  kiss_sdl version 0.8.4
 */
 
 #include "kiss_sdl.h"
@@ -42,19 +42,19 @@ int kiss_pointinrect(int x, int y, SDL_Rect *rect)
 
 char *kiss_string_copy(char *dest, size_t size, char *source1, char *source2)
 {
-	unsigned int size1, size2, len;
+	unsigned int len;
 	char *p;
 
 	if (!dest) return NULL;
+	strcpy(dest, "");
 	if (size < 2) return dest;
-	size1 = size - 1;
-	if (source1) strncpy(dest, source1, size1);
-	dest[size1] = 0;
+	if (source1) strncpy(dest, source1, size);
+	dest[size - 1] = 0;
 	len = strlen(dest);
-	if (!source2 || size1 - len < 1) return dest;
-	size2 = size1 - len;
+	if (!source2 || size - 1 <= len) return dest;
 	p = dest;
-	strncpy(p + len, source2, size2);
+	strncpy(p + len, source2, size - len);
+	dest[size - 1] = 0;
 	return dest;
 }
 
