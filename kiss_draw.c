@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.8.4
+  kiss_sdl version 0.8.6
 */
 
 #include "kiss_sdl.h"
@@ -182,13 +182,13 @@ SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h)
 	kiss_array_append(a, TEXTURE_TYPE, kiss_bar);
 	SDL_QueryTexture(kiss_bar, NULL, NULL, &kiss_bar_width,
 		&kiss_bar_height);
-	kiss_vslider = IMG_LoadTexture(renderer, "kiss_slider.png");
+	kiss_vslider = IMG_LoadTexture(renderer, "kiss_vslider.png");
 	kiss_array_append(a, TEXTURE_TYPE, kiss_vslider);
 	SDL_QueryTexture(kiss_vslider, NULL, NULL, &kiss_vslider_width,
 		&kiss_vslider_height);
 	kiss_up_height = kiss_vslider_width;
 	kiss_down_height = kiss_vslider_width;
-	kiss_hslider = IMG_LoadTexture(renderer, "kiss_slider.png");
+	kiss_hslider = IMG_LoadTexture(renderer, "kiss_hslider.png");
 	kiss_array_append(a, TEXTURE_TYPE, kiss_hslider);
 	SDL_QueryTexture(kiss_hslider, NULL, NULL, &kiss_hslider_width,
 		&kiss_hslider_height);
