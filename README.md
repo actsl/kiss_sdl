@@ -146,7 +146,7 @@ difficult to do what you want otherwise.
 
 The kiss_sdl manual, including the full reference, is at the following link.
 
-(https://raw.githubusercontent.com/actsl/kiss_sdl/master/kiss_manual.pdf)
+https://raw.githubusercontent.com/actsl/kiss_sdl/master/kiss_manual.pdf
 
 
 INSTALL
