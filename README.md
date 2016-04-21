@@ -36,11 +36,7 @@ and kiss_posix.c , for some of the most necessary POSIX functions.
 
 The global variables are not declared as constant, to make the code more
 easily modifiable, but they should be used as constants, by changing
-them only during the initialization. kiss_edge and kiss_border are
-important global variables for aligning the widgets, border is a free
-space around the edge of the widget, and edge is the distance from the
-edge of the widget to the beginning of the decoration, or where the
-decoration becomes dark enough. In case of an error, the functions of
+them only during the initialization. In case of an error, the functions of
 this toolkit return -1 or NULL, depending on the return type, and the
 event processing funtions return 0.
 
@@ -148,6 +144,10 @@ or what you can do. Just learn the basic things about how it works,
 the toolkit is simple and thus not difficult to learn, but it would be
 difficult to do what you want otherwise.
 
+The kiss_sdl manual, including the full reference, is at the following link.
+
+(https://raw.githubusercontent.com/actsl/kiss_sdl/master/kiss_manual.pdf)
+
 
 INSTALL
 =======
@@ -196,7 +196,7 @@ SCREENSHOTS
 VERSION
 =======
 
-0.8.6
+0.8.8
 
 
 LICENSE

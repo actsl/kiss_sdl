@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.8.6
+  kiss_sdl version 0.8.8
 */
 
 #include "kiss_sdl.h"
@@ -79,7 +79,7 @@ static void combobox_event(kiss_combobox *combobox, SDL_Event *e,
 	char *stext, kiss_entry *entry, kiss_selectbutton *select1,
 	kiss_selectbutton *select2, kiss_hscrollbar *hscrollbar, int *draw)
 {
-	void *p, *s;
+	void **p, *s;
 	int i;
 
 	s = combobox->entry.text;
@@ -87,7 +87,7 @@ static void combobox_event(kiss_combobox *combobox, SDL_Event *e,
 		if ((p = bsearch(&s, combobox->textbox.array->data,
 			combobox->textbox.array->length, sizeof(void *),
 			kiss_string_compare))) {
-			i = (void **) p - combobox->textbox.array->data;
+			i = p - combobox->textbox.array->data;
 			if (select1->selected)
 				sprintf(stext, "The population of the "
 					"metropolitan area of %s is %d.",

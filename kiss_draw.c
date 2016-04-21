@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.8.6
+  kiss_sdl version 0.8.8
 */
 
 #include "kiss_sdl.h"
@@ -82,18 +82,17 @@ int kiss_rendertexture(SDL_Renderer *renderer, SDL_Texture *image,
 	return 0;
 }
 
-int kiss_rendertext(SDL_Renderer *renderer, char *message, int x, int y,
+int kiss_rendertext(SDL_Renderer *renderer, char *text, int x, int y,
 	int ftype, SDL_Color color)
 {
 	SDL_Surface *surface;
 	SDL_Texture *texture;
 
-	if (!message || !renderer) return -1;
+	if (!text || !renderer) return -1;
 	if (ftype == TEXT_FONT)
-		surface = TTF_RenderText_Blended(kiss_textfont, message,
-			color);
+		surface = TTF_RenderText_Blended(kiss_textfont, text, color);
 	else if (ftype == BUTTON_FONT)
-		surface = TTF_RenderText_Blended(kiss_buttonfont, message,
+		surface = TTF_RenderText_Blended(kiss_buttonfont, text,
 			color);
 	else
 		return -1;

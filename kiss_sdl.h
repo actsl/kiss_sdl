@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.8.6
+  kiss_sdl version 0.8.8
 */
 
 #ifndef _kiss_sdl_h
@@ -165,7 +165,6 @@ typedef struct kiss_progressbar {
 	SDL_Rect rect;
 	int visible;
 	SDL_Rect barrect;
-	int active;
 	int width;
 	double fraction;
 	double step;
@@ -229,16 +228,20 @@ SDL_Texture *kiss_normal, *kiss_prelight, *kiss_active, *kiss_bar,
 	*kiss_up, *kiss_down, *kiss_left, *kiss_right, *kiss_vslider,
 	*kiss_hslider, *kiss_unselected, *kiss_selected;
 double kiss_spacing;
-int kiss_text_spacing, kiss_text_lineheight, kiss_text_advance,
-	kiss_text_fontheight, kiss_button_advance, kiss_button_texty,
-	kiss_screen_width, kiss_screen_height, kiss_bar_width,
-	kiss_bar_height, kiss_button_width, kiss_button_height,
-	kiss_vslider_width, kiss_vslider_height, kiss_up_height,
-	kiss_down_height, kiss_hslider_width, kiss_hslider_height,
-	kiss_left_width, kiss_right_width, kiss_selected_width,
-	kiss_selected_height, kiss_click_interval, kiss_textfont_size,
-	kiss_buttonfont_size, kiss_progress_interval, kiss_slider_padding,
-	kiss_edge, kiss_border, kiss_text_descent;
+int kiss_textfont_size, kiss_buttonfont_size;
+int kiss_click_interval, kiss_progress_interval;
+int kiss_slider_padding;
+int kiss_border, kiss_edge;
+int kiss_screen_width, kiss_screen_height;
+int kiss_text_advance, kiss_text_fontheight, kiss_text_descent;
+int kiss_text_spacing, kiss_text_lineheight;
+int kiss_button_texty;
+int kiss_button_advance;
+int kiss_button_width, kiss_button_height, kiss_selected_width,
+	kiss_selected_height, kiss_vslider_width, kiss_vslider_height,
+	kiss_up_height, kiss_down_height, kiss_hslider_width,
+	kiss_hslider_height, kiss_left_width, kiss_right_width,
+	kiss_bar_width, kiss_bar_height;
 
 char *kiss_getcwd(char *buf, int size);
 int kiss_chdir(char *path);
@@ -267,7 +270,7 @@ int kiss_maxlength(int ftype, int width, char *str);
 int kiss_textwidth(int ftype, char *str1, char *str2);
 int kiss_rendertexture(SDL_Renderer *renderer, SDL_Texture *image,
 	int x, int y, SDL_Rect *clip);
-int kiss_rendertext(SDL_Renderer *renderer, char *message, int x, int y,
+int kiss_rendertext(SDL_Renderer *renderer, char *text, int x, int y,
 	int ftype, SDL_Color color);
 int kiss_fillrect(SDL_Renderer *renderer, SDL_Rect *rect, SDL_Color color);
 int kiss_decorate(SDL_Renderer *renderer, SDL_Rect *rect, SDL_Color color,
