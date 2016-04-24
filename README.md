@@ -195,7 +195,7 @@ mingw32-make -f kiss_makefile
 VERSION
 =======
 
-0.8.10
+0.8.12
 
 
 LICENSE
