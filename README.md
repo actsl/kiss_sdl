@@ -4,6 +4,14 @@ NAME
 kiss_sdl - Simple universal GUI widget toolkit for SDL2
 
 
+SCREENSHOTS
+===========
+
+![](https://raw.githubusercontent.com/actsl/kiss_sdl/master/kiss_ss1.jpg)
+
+![](https://raw.githubusercontent.com/actsl/kiss_sdl/master/kiss_ss2.jpg)
+
+
 DESCRIPTION
 ===========
 
@@ -50,14 +58,12 @@ to do. See the examples and the header file kiss_sdl.h .
 Widgets can be made visible and invisible, an invisible widget is also
 inactive and doesn't perform any functions. In the examples, all widgets
 are created first, and then only these that should be active and present
-on the screen, are made visible. It is also possible to create and
-free widgets dynamically. Making a user interface in that way may sound
-strange at first, but to think, the functions for all widgets have to be
-in the code anyway, so creating all widgets at once does not significantly
-increase the use of memory, especially for smaller user interfaces. For
-bigger ones it is possible to create widgets dynamically. But making it
-only by switching the visibility, enables a simpler implementation of
-a user interface.
+on the screen, are made visible. It is also possible to create and free
+widgets dynamically. Making a user interface in that way may sound strange
+at first, but all the user written functions for widgets have to be there
+anyway, a lot has to be there for all widgets. For bigger interfaces it
+is possible to create widgets dynamically. But making it only by switching
+the visibility, enables a simpler implementation of a user interface.
 
 The functions for creating widgets also have an argument wdw which,
 if provided, makes the widget to become visible when the window widget
@@ -95,7 +101,7 @@ Ten widgets are implemented as standard widgets, these are a window,
 multiline label, button, select button, vertical scrollbar, horizontal
 scrollbar, progress bar, entry box, textbox, and combo box. The two
 examples show how to use these widgets together. The first example
-implements a working file selection dialog with scrollable textboxes,
+implements a working file selection dialog with scrollable text boxes,
 the second example shows a use of a combo box. Likely most of the user
 interfaces can be made by using only these widgets, but the toolkit
 doesn't prevent adding any additional functionality.
@@ -120,11 +126,11 @@ Is it possible to do the event processing in a separate function? Yes it
 is, but because of simplicity this has not been done in the examples of
 this toolkit. The general variable size array implemented in this toolkit,
 enables to add the widget structures to it, and pass them together to
-an external function. The variable size array also has an id number
-for every element, this enables to use unique numbers for every added
-widget, and by these numbers it is possible to identify these widgets
-in another function. Passing objects like that also makes a re-entrant
-or thread-safe code possible.
+an external function. The variable size array also has an id number for
+every element, this enables to use unique numbers for every added widget,
+and by these numbers it is possible to identify these widgets in another
+function. Passing objects like that also makes a re-entrant or thread-safe
+code possible, also in this widget toolkit there is nothing central.
 
 Can the images be compiled into the code, instead of being in separate
 files? Yes they can, images can be compiled into the C code, also Gimp
@@ -144,7 +150,8 @@ or what you can do. Just learn the basic things about how it works,
 the toolkit is simple and thus not difficult to learn, but it would be
 difficult to do what you want otherwise.
 
-The kiss_sdl manual, including the full reference, is at the following link.
+The kiss_sdl manual, including the full reference and example 2 tutorial,
+is at the following link.
 
 https://raw.githubusercontent.com/actsl/kiss_sdl/master/kiss_manual.pdf
 
@@ -160,7 +167,7 @@ edit the makefile, comment the LDFLAGS, CFLAGS, EXE1 and EXE2, and
 uncomment the LDFLAGS, CFLAGS, EXE1 and EXE2 for Windows. Then change
 the paths to the directories under the folders where you installed your
 SDL development libraries. By default it is assumed that the libraries
-are installed under C:\. The change may be simple, like only changing
+are installed under C:\\. The change may be simple, like only changing
 the version of the library from 2.0.4 to 2.0.6.
 
 The common way in Windows is to copy all the dll-s from the proper bin
@@ -185,18 +192,10 @@ make -f kiss_makefile
 mingw32-make -f kiss_makefile
 
 
-SCREENSHOTS
-===========
-
-![](https://raw.githubusercontent.com/actsl/kiss_sdl/master/kiss_ss1.jpg)
-
-![](https://raw.githubusercontent.com/actsl/kiss_sdl/master/kiss_ss2.jpg)
-
-
 VERSION
 =======
 
-0.8.8
+0.8.10
 
 
 LICENSE
