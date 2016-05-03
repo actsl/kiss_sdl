@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.8.12
+  kiss_sdl version 0.8.14
 */
 
 #include "kiss_sdl.h"
@@ -147,6 +147,7 @@ SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h)
 	kiss_screen_height = h;
 	IMG_Init(IMG_INIT_PNG);
 	TTF_Init();
+	SDL_StartTextInput();
 	window = SDL_CreateWindow(title, srect.w / 2 - w / 2,
 		srect.h / 2 - h / 2, w, h, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1,
@@ -155,59 +156,58 @@ SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h)
 	kiss_array_append(a, WINDOW_TYPE, window);
 	kiss_array_append(a, RENDERER_TYPE, renderer);
 	kiss_textfont = TTF_OpenFont("kiss_font.ttf", kiss_textfont_size);
-	kiss_array_append(a, FONT_TYPE, kiss_textfont);
-	kiss_text_fontheight = TTF_FontHeight(kiss_textfont);
-	kiss_text_spacing = (int) kiss_spacing * kiss_text_fontheight;
-	kiss_text_lineheight = kiss_text_fontheight + kiss_text_spacing;
-	kiss_text_descent = 1 - TTF_FontDescent(kiss_textfont);
 	TTF_GlyphMetrics(kiss_textfont, 'W', NULL, NULL, NULL, NULL,
 		&kiss_text_advance);
+	kiss_text_fontheight = TTF_FontHeight(kiss_textfont);
+	kiss_text_descent = 1 - TTF_FontDescent(kiss_textfont);
+	kiss_array_append(a, FONT_TYPE, kiss_textfont);
 	kiss_buttonfont = TTF_OpenFont("kiss_font.ttf",
 		kiss_buttonfont_size);
-	kiss_array_append(a, FONT_TYPE, kiss_buttonfont);
-	button_fontheight = TTF_FontHeight(kiss_buttonfont);
 	TTF_GlyphMetrics(kiss_buttonfont, 'W', NULL, NULL, NULL, NULL,
 		&kiss_button_advance);
+	button_fontheight = TTF_FontHeight(kiss_buttonfont);
+	kiss_array_append(a, FONT_TYPE, kiss_buttonfont);
 	kiss_normal = IMG_LoadTexture(renderer, "kiss_normal.png");
-	kiss_array_append(a, TEXTURE_TYPE, kiss_normal);
 	SDL_QueryTexture(kiss_normal, NULL, NULL, &kiss_button_width,
 		&kiss_button_height);
-	kiss_button_texty = kiss_button_height / 2 - button_fontheight / 2;
+	kiss_array_append(a, TEXTURE_TYPE, kiss_normal);
 	kiss_prelight = IMG_LoadTexture(renderer, "kiss_prelight.png");
 	kiss_array_append(a, TEXTURE_TYPE, kiss_prelight);
 	kiss_active = IMG_LoadTexture(renderer, "kiss_active.png");
 	kiss_array_append(a, TEXTURE_TYPE, kiss_active);
 	kiss_bar = IMG_LoadTexture(renderer, "kiss_bar.png");
-	kiss_array_append(a, TEXTURE_TYPE, kiss_bar);
 	SDL_QueryTexture(kiss_bar, NULL, NULL, &kiss_bar_width,
 		&kiss_bar_height);
+	kiss_array_append(a, TEXTURE_TYPE, kiss_bar);
 	kiss_vslider = IMG_LoadTexture(renderer, "kiss_vslider.png");
-	kiss_array_append(a, TEXTURE_TYPE, kiss_vslider);
 	SDL_QueryTexture(kiss_vslider, NULL, NULL, &kiss_vslider_width,
 		&kiss_vslider_height);
-	kiss_up_height = kiss_vslider_width;
-	kiss_down_height = kiss_vslider_width;
+	kiss_array_append(a, TEXTURE_TYPE, kiss_vslider);
 	kiss_hslider = IMG_LoadTexture(renderer, "kiss_hslider.png");
-	kiss_array_append(a, TEXTURE_TYPE, kiss_hslider);
 	SDL_QueryTexture(kiss_hslider, NULL, NULL, &kiss_hslider_width,
 		&kiss_hslider_height);
-	kiss_left_width = kiss_hslider_height;
-	kiss_right_width = kiss_hslider_height;
+	kiss_array_append(a, TEXTURE_TYPE, kiss_hslider);
 	kiss_up = IMG_LoadTexture(renderer, "kiss_up.png");
+	SDL_QueryTexture(kiss_up, NULL, NULL, NULL, &kiss_up_height);
 	kiss_array_append(a, TEXTURE_TYPE, kiss_up);
 	kiss_down = IMG_LoadTexture(renderer, "kiss_down.png");
+	SDL_QueryTexture(kiss_down, NULL, NULL, NULL, &kiss_down_height);
 	kiss_array_append(a, TEXTURE_TYPE, kiss_down);
 	kiss_left = IMG_LoadTexture(renderer, "kiss_left.png");
+	SDL_QueryTexture(kiss_left, NULL, NULL, &kiss_left_width, NULL);
 	kiss_array_append(a, TEXTURE_TYPE, kiss_left);
 	kiss_right = IMG_LoadTexture(renderer, "kiss_right.png");
+	SDL_QueryTexture(kiss_right, NULL, NULL, &kiss_right_width, NULL);
 	kiss_array_append(a, TEXTURE_TYPE, kiss_right);
 	kiss_selected = IMG_LoadTexture(renderer, "kiss_selected.png");
-	kiss_array_append(a, TEXTURE_TYPE, kiss_selected);
 	SDL_QueryTexture(kiss_selected, NULL, NULL, &kiss_selected_width,
 		&kiss_selected_height);
+	kiss_array_append(a, TEXTURE_TYPE, kiss_selected);
 	kiss_unselected = IMG_LoadTexture(renderer, "kiss_unselected.png");
 	kiss_array_append(a, TEXTURE_TYPE, kiss_unselected);
-	SDL_StartTextInput();
+	kiss_text_spacing = (int) kiss_spacing * kiss_text_fontheight;
+	kiss_text_lineheight = kiss_text_fontheight + kiss_text_spacing;
+	kiss_button_texty = kiss_button_height / 2 - button_fontheight / 2;
 	return renderer;	
 }
 

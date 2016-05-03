@@ -150,8 +150,8 @@ or what you can do. Just learn the basic things about how it works,
 the toolkit is simple and thus not difficult to learn, but it would be
 difficult to do what you want otherwise.
 
-The kiss_sdl manual, including the full reference and example 2 tutorial,
-is at the following link.
+The kiss_sdl manual, including the full reference, Hello World example
+and example 2 tutorial, is at the following link.
 
 https://raw.githubusercontent.com/actsl/kiss_sdl/master/kiss_manual.pdf
 
@@ -195,7 +195,7 @@ mingw32-make -f kiss_makefile
 VERSION
 =======
 
-0.8.12
+0.8.14
 
 
 LICENSE
