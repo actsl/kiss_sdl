@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.8.14
+  kiss_sdl version 0.10.0
 */
 
 #include "kiss_sdl.h"
@@ -56,7 +56,7 @@ static void dirent_read(kiss_textbox *textbox1, kiss_vscrollbar *vscrollbar1,
 	if (buf[0] == 'C') strcpy(ending, "\\");
 	if (!strcmp(buf, "/") || !strcmp(buf, "C:\\")) strcpy(ending, "");
 	kiss_string_copy(label_sel->text, (2 * textbox1->rect.w +
-		2 * kiss_vslider_width) / kiss_text_advance, buf, ending);
+		2 * kiss_up.w) / kiss_textfont.advance, buf, ending);
 #ifdef _MSC_VER
 	dir = kiss_opendir("*");
 #else
@@ -122,9 +122,9 @@ static void textbox2_event(kiss_textbox *textbox, SDL_Event *e,
 		if (strcmp((char *) kiss_array_data(textbox->array, index),
 			"")) {
 			kiss_string_copy(entry->text,
-			entry->textwidth / kiss_text_advance,
-			(char *) kiss_array_data(textbox->array, index),
-			NULL);
+				entry->textwidth / kiss_textfont.advance,
+				(char *) kiss_array_data(textbox->array,
+				index), NULL);
 			*draw = 1;
 		}
 	}
@@ -153,7 +153,7 @@ static void button_ok1_event(kiss_button *button, SDL_Event *e,
 
 	if (kiss_button_event(button, e, draw)) {
 		kiss_string_copy(buf, (window2->rect.w -
-			2 * kiss_vslider_width) / kiss_text_advance,
+			2 * kiss_vslider.w) / kiss_textfont.advance,
 			label_sel->text, entry->text);
 		kiss_string_copy(label_res->text, KISS_MAX_LABEL, 
 			"The following path was selected:\n", buf);
@@ -199,8 +199,8 @@ int main(int argc, char **argv)
 	kiss_vscrollbar vscrollbar1, vscrollbar2;
 	kiss_progressbar progressbar;
 	kiss_entry entry;
-	int textbox_width, textbox_height, window2_width,
-		window2_height, draw, quit;
+	int textbox_width, textbox_height, window2_width, window2_height,
+		draw, quit;
 
 	quit = 0;
 	draw = 1;
@@ -218,44 +218,44 @@ int main(int argc, char **argv)
 	kiss_window_new(&window1, NULL, 1, 0, 0, kiss_screen_width,
 		kiss_screen_height);
 	kiss_textbox_new(&textbox1, &window1, 1, &a1, kiss_screen_width / 2 -
-		(2 * textbox_width + 2 * kiss_vslider_width - kiss_edge) / 2,
-		3 * kiss_button_height, textbox_width, textbox_height);
+		(2 * textbox_width + 2 * kiss_up.w - kiss_edge) / 2,
+		3 * kiss_normal.h, textbox_width, textbox_height);
 	kiss_vscrollbar_new(&vscrollbar1, &window1, textbox1.rect.x +
 		textbox_width, textbox1.rect.y, textbox_height);
 	kiss_textbox_new(&textbox2, &window1, 1, &a2,
-		vscrollbar1.uprect.x + kiss_vslider_width,
-		textbox1.rect.y, textbox_width, textbox_height);
+		vscrollbar1.uprect.x + kiss_up.w, textbox1.rect.y,
+		textbox_width, textbox_height);
 	kiss_vscrollbar_new(&vscrollbar2, &window1, textbox2.rect.x +
 		textbox_width, vscrollbar1.uprect.y, textbox_height);
 	kiss_label_new(&label1, &window1, "Folders", textbox1.rect.x +
-		kiss_edge, textbox1.rect.y - kiss_text_lineheight);
+		kiss_edge, textbox1.rect.y - kiss_textfont.lineheight);
 	kiss_label_new(&label2, &window1, "Files", textbox2.rect.x +
-		kiss_edge, textbox1.rect.y - kiss_text_lineheight);
+		kiss_edge, textbox1.rect.y - kiss_textfont.lineheight);
 	kiss_label_new(&label_sel, &window1, "", textbox1.rect.x +
 		kiss_edge, textbox1.rect.y + textbox_height +
-		kiss_button_height);
+		kiss_normal.h);
 	kiss_entry_new(&entry, &window1, 1, "kiss", textbox1.rect.x,
-		label_sel.rect.y + kiss_text_lineheight, 2 * textbox_width +
-		2 * kiss_vslider_width + kiss_edge);
+		label_sel.rect.y + kiss_textfont.lineheight,
+		2 * textbox_width + 2 * kiss_up.w + kiss_edge);
 	kiss_button_new(&button_cancel, &window1, "Cancel",
-		entry.rect.x + entry.rect.w - kiss_edge - kiss_button_width,
-		entry.rect.y + entry.rect.h + kiss_button_height);
+		entry.rect.x + entry.rect.w - kiss_edge - kiss_normal.w,
+		entry.rect.y + entry.rect.h + kiss_normal.h);
 	kiss_button_new(&button_ok1, &window1, "OK", button_cancel.rect.x -
-		2 * kiss_button_width, button_cancel.rect.y);
+		2 * kiss_normal.w, button_cancel.rect.y);
 	kiss_window_new(&window2, NULL, 1, kiss_screen_width / 2 -
 		window2_width / 2, kiss_screen_height / 2 -
 		window2_height / 2, window2_width, window2_height);
 	kiss_label_new(&label_res, &window2, "", window2.rect.x +
-		kiss_vslider_width, window2.rect.y + kiss_vslider_height);
-		label_res.textcolor = kiss_blue;
+		kiss_up.w, window2.rect.y + kiss_vslider.h);
+	label_res.textcolor = kiss_blue;
 	kiss_progressbar_new(&progressbar, &window2, window2.rect.x +
-		kiss_vslider_width - kiss_edge, window2.rect.y +
-		window2.rect.h / 2 - kiss_bar_height / 2 - kiss_border,
-		window2.rect.w - 2 * kiss_vslider_width + 2 * kiss_edge);
+		kiss_up.w - kiss_edge, window2.rect.y + window2.rect.h / 2 -
+		kiss_bar.h / 2 - kiss_border,
+		window2.rect.w - 2 * kiss_up.w + 2 * kiss_edge);
 	kiss_button_new(&button_ok2, &window2, "OK", window2.rect.x +
-		window2.rect.w / 2 - kiss_button_width / 2,
+		window2.rect.w / 2 - kiss_normal.w / 2,
 		progressbar.rect.y + progressbar.rect.h +
-		2 * kiss_vslider_height);
+		2 * kiss_vslider.h);
 
 	dirent_read(&textbox1, &vscrollbar1, &textbox2, &vscrollbar2,
 		&label_sel);
@@ -280,8 +280,8 @@ int main(int argc, char **argv)
 				&draw);
 			vscrollbar2_event(&vscrollbar2, &e, &textbox2, &draw);
 			button_ok1_event(&button_ok1, &e, &window1, &window2,
-				&label_sel, &entry, &label_res,
-				&progressbar, &draw);
+				&label_sel, &entry, &label_res,	&progressbar,
+				&draw);
 			button_cancel_event(&button_cancel, &e, &quit,
 				&draw);
 			kiss_entry_event(&entry, &e, &draw);

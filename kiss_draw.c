@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.8.14
+  kiss_sdl version 0.10.0
 */
 
 #include "kiss_sdl.h"
@@ -38,68 +38,69 @@ SDL_Color kiss_green = {0, 150, 0, 255};
 SDL_Color kiss_blue = {0, 0, 255, 255};
 SDL_Color kiss_lightblue = {200, 225, 255, 255};
 
-/* Can be rewritten for proportional fonts or unicode */
-int kiss_maxlength(int ftype, int width, char *str)
+unsigned int kiss_getticks(void)
 {
-	if (ftype == TEXT_FONT && width /
-		kiss_text_advance < KISS_MAX_LENGTH)
-		/* Buffer length, text plus terminating '\0' */
-		return width / kiss_text_advance + 1;
-	else if (ftype == BUTTON_FONT && width /
-		kiss_button_advance < KISS_MAX_LENGTH)
-		return width / kiss_button_advance + 1;
-	return -1;
+	return SDL_GetTicks();
 }
 
-/* Can be rewritten for proportional fonts or unicode */
-int kiss_textwidth(int ftype, char *str1, char *str2)
+/* Can be rewritten for proportional fonts */
+int kiss_maxlength(kiss_font font, int width, char *str)
+{
+	int last, n, i;
+
+	n = 0;
+	last = 0;
+	if (!str) return -1;
+	/* Buffer length, text plus terminating '\0' */
+	for (i = 0; str[i] && i < KISS_MAX_LENGTH; i++)
+		if ((str[i] & 128) == 0 || (str[i] & 224) == 192 ||
+			(str[i] & 240) == 224 || (str[i] & 248) == 240) {
+			if (++n * font.advance > width)
+				return last + 2;
+			else
+				last = i;
+		}
+	return last + 2;
+}
+
+/* Can be rewritten for proportional fonts */
+int kiss_textwidth(kiss_font font, char *str1, char *str2)
 {
 	int length;
 
 	length = 0;
 	if (!str1 && !str2) return -1;
-	if (str1) length += strlen(str1);
-	if (str2) length += strlen(str2);
-	if (ftype == TEXT_FONT)
-		return length * kiss_text_advance;
-	else if (ftype == BUTTON_FONT)
-		return length * kiss_button_advance;
-	return -1;
+	if (str1) length += kiss_utf8len(str1);
+	if (str2) length += kiss_utf8len(str2);
+	return length * font.advance;
 }
 
-int kiss_rendertexture(SDL_Renderer *renderer, SDL_Texture *image,
+int kiss_renderimage(SDL_Renderer *renderer, kiss_image image,
 	int x, int y, SDL_Rect *clip)
 {
 	SDL_Rect dst;
 
-	if (!image || !renderer) return -1;
-	dst.x = x;
-	dst.y = y;
-	SDL_QueryTexture(image, NULL, NULL, &dst.w, &dst.h);
+	if (!renderer || !image.image) return -1;
+	kiss_makerect(&dst, x, y, image.w, image.h);
 	if (clip) dst.w = clip->w;
 	if (clip) dst.h = clip->h;
-	SDL_RenderCopy(renderer, image, clip, &dst);
+	SDL_RenderCopy(renderer, image.image, clip, &dst);
 	return 0;
 }
 
 int kiss_rendertext(SDL_Renderer *renderer, char *text, int x, int y,
-	int ftype, SDL_Color color)
+	kiss_font font, SDL_Color color)
 {
 	SDL_Surface *surface;
-	SDL_Texture *texture;
+	kiss_image image;
 
-	if (!text || !renderer) return -1;
-	if (ftype == TEXT_FONT)
-		surface = TTF_RenderText_Blended(kiss_textfont, text, color);
-	else if (ftype == BUTTON_FONT)
-		surface = TTF_RenderText_Blended(kiss_buttonfont, text,
-			color);
-	else
-		return -1;
-	texture = SDL_CreateTextureFromSurface(renderer, surface);
+	if (!text || !renderer || !font.font) return -1;
+	surface = TTF_RenderUTF8_Blended(font.font, text, color);
+	image.image = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_QueryTexture(image.image, NULL, NULL, &image.w, &image.h);
 	if (surface) SDL_FreeSurface(surface);
-	kiss_rendertexture(renderer, texture, x, y, NULL);
-	SDL_DestroyTexture(texture);
+	kiss_renderimage(renderer, image, x, y, NULL);
+	SDL_DestroyTexture(image.image);
 	return 0;
 }
 
@@ -130,12 +131,41 @@ int kiss_decorate(SDL_Renderer *renderer, SDL_Rect *rect, SDL_Color color,
 	return 0;
 }
 
+static int image_new(kiss_image *image, char *fname, kiss_array *a,
+	SDL_Renderer* renderer)
+{
+	char buf[KISS_MAX_LENGTH];
+
+	if (!image || !fname) return -1;
+	kiss_string_copy(buf, KISS_MAX_LENGTH, RESDIR, fname);
+	image->image = IMG_LoadTexture(renderer, buf);
+	if (a) kiss_array_append(a, TEXTURE_TYPE, image->image);
+	SDL_QueryTexture(image->image, NULL, NULL, &image->w, &image->h);
+	return 0;
+}
+
+static int font_new(kiss_font *font, char *fname, kiss_array *a, int size)
+{
+	char buf[KISS_MAX_LENGTH];
+
+	if (!font || !fname) return -1;
+	kiss_string_copy(buf, KISS_MAX_LENGTH, RESDIR, fname);
+	font->font = TTF_OpenFont(buf, size);
+	if (a) kiss_array_append(a, FONT_TYPE, font->font);
+	font->fontheight = TTF_FontHeight(font->font);
+	font->spacing = (int) kiss_spacing * font->fontheight;
+	font->lineheight = font->fontheight + font->spacing;
+	font->ascent = TTF_FontAscent(font->font);
+	TTF_GlyphMetrics(font->font, 'W', NULL, NULL, NULL, NULL,
+		&(font->advance));
+	return 0;
+}
+
 SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h)
 {
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 	SDL_Rect srect;
-	int button_fontheight;
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 	SDL_GetDisplayBounds(0, &srect);
@@ -155,59 +185,20 @@ SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h)
 	kiss_array_new(a);
 	kiss_array_append(a, WINDOW_TYPE, window);
 	kiss_array_append(a, RENDERER_TYPE, renderer);
-	kiss_textfont = TTF_OpenFont("kiss_font.ttf", kiss_textfont_size);
-	TTF_GlyphMetrics(kiss_textfont, 'W', NULL, NULL, NULL, NULL,
-		&kiss_text_advance);
-	kiss_text_fontheight = TTF_FontHeight(kiss_textfont);
-	kiss_text_descent = 1 - TTF_FontDescent(kiss_textfont);
-	kiss_array_append(a, FONT_TYPE, kiss_textfont);
-	kiss_buttonfont = TTF_OpenFont("kiss_font.ttf",
-		kiss_buttonfont_size);
-	TTF_GlyphMetrics(kiss_buttonfont, 'W', NULL, NULL, NULL, NULL,
-		&kiss_button_advance);
-	button_fontheight = TTF_FontHeight(kiss_buttonfont);
-	kiss_array_append(a, FONT_TYPE, kiss_buttonfont);
-	kiss_normal = IMG_LoadTexture(renderer, "kiss_normal.png");
-	SDL_QueryTexture(kiss_normal, NULL, NULL, &kiss_button_width,
-		&kiss_button_height);
-	kiss_array_append(a, TEXTURE_TYPE, kiss_normal);
-	kiss_prelight = IMG_LoadTexture(renderer, "kiss_prelight.png");
-	kiss_array_append(a, TEXTURE_TYPE, kiss_prelight);
-	kiss_active = IMG_LoadTexture(renderer, "kiss_active.png");
-	kiss_array_append(a, TEXTURE_TYPE, kiss_active);
-	kiss_bar = IMG_LoadTexture(renderer, "kiss_bar.png");
-	SDL_QueryTexture(kiss_bar, NULL, NULL, &kiss_bar_width,
-		&kiss_bar_height);
-	kiss_array_append(a, TEXTURE_TYPE, kiss_bar);
-	kiss_vslider = IMG_LoadTexture(renderer, "kiss_vslider.png");
-	SDL_QueryTexture(kiss_vslider, NULL, NULL, &kiss_vslider_width,
-		&kiss_vslider_height);
-	kiss_array_append(a, TEXTURE_TYPE, kiss_vslider);
-	kiss_hslider = IMG_LoadTexture(renderer, "kiss_hslider.png");
-	SDL_QueryTexture(kiss_hslider, NULL, NULL, &kiss_hslider_width,
-		&kiss_hslider_height);
-	kiss_array_append(a, TEXTURE_TYPE, kiss_hslider);
-	kiss_up = IMG_LoadTexture(renderer, "kiss_up.png");
-	SDL_QueryTexture(kiss_up, NULL, NULL, NULL, &kiss_up_height);
-	kiss_array_append(a, TEXTURE_TYPE, kiss_up);
-	kiss_down = IMG_LoadTexture(renderer, "kiss_down.png");
-	SDL_QueryTexture(kiss_down, NULL, NULL, NULL, &kiss_down_height);
-	kiss_array_append(a, TEXTURE_TYPE, kiss_down);
-	kiss_left = IMG_LoadTexture(renderer, "kiss_left.png");
-	SDL_QueryTexture(kiss_left, NULL, NULL, &kiss_left_width, NULL);
-	kiss_array_append(a, TEXTURE_TYPE, kiss_left);
-	kiss_right = IMG_LoadTexture(renderer, "kiss_right.png");
-	SDL_QueryTexture(kiss_right, NULL, NULL, &kiss_right_width, NULL);
-	kiss_array_append(a, TEXTURE_TYPE, kiss_right);
-	kiss_selected = IMG_LoadTexture(renderer, "kiss_selected.png");
-	SDL_QueryTexture(kiss_selected, NULL, NULL, &kiss_selected_width,
-		&kiss_selected_height);
-	kiss_array_append(a, TEXTURE_TYPE, kiss_selected);
-	kiss_unselected = IMG_LoadTexture(renderer, "kiss_unselected.png");
-	kiss_array_append(a, TEXTURE_TYPE, kiss_unselected);
-	kiss_text_spacing = (int) kiss_spacing * kiss_text_fontheight;
-	kiss_text_lineheight = kiss_text_fontheight + kiss_text_spacing;
-	kiss_button_texty = kiss_button_height / 2 - button_fontheight / 2;
+	font_new(&kiss_textfont, "kiss_font.ttf", a, kiss_textfont_size);
+	font_new(&kiss_buttonfont, "kiss_font.ttf", a, kiss_buttonfont_size);
+	image_new(&kiss_normal, "kiss_normal.png", a, renderer);
+	image_new(&kiss_prelight, "kiss_prelight.png", a, renderer);
+	image_new(&kiss_active, "kiss_active.png", a, renderer);
+	image_new(&kiss_bar, "kiss_bar.png", a, renderer);
+	image_new(&kiss_vslider, "kiss_vslider.png", a, renderer);
+	image_new(&kiss_hslider, "kiss_hslider.png", a, renderer);
+	image_new(&kiss_up, "kiss_up.png", a, renderer);
+	image_new(&kiss_down, "kiss_down.png", a, renderer);
+	image_new(&kiss_left, "kiss_left.png", a, renderer);
+	image_new(&kiss_right, "kiss_right.png", a, renderer);
+	image_new(&kiss_selected, "kiss_selected.png", a, renderer);
+	image_new(&kiss_unselected, "kiss_unselected.png", a, renderer);
 	return renderer;	
 }
 

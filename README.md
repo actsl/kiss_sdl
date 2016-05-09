@@ -15,26 +15,26 @@ SCREENSHOTS
 DESCRIPTION
 ===========
 
-Kiss is a known saying that means "Keep it simple". Different from other
-widget toolkits where you are supposed to choose from the existing
-widgets the one that fits you the best, in this toolkit, when there
-is no widget that satisfies all your needs, modify an existing widget,
-or write your own. Most other toolkits enable to write your own widgets,
-but it is not simple to do that, and they are not intended for that. The
-toolkit was made as simple as possible, to solve the problem of an immense
-complexity of most of the existing toolkits, which makes it impossible
-for many people to even use them. At that it was made universal, many
-simpler toolkits don't enable you to do many things that you want, due
-to their restricted internal design. This toolkit implements an original
-innovative approach for a widget toolkit, this new approach enabled
-to make the widget toolkit simpler than widget toolkits previously
-written. The toolkit is written in C, but it can also be used in C++.
+KISS is an acronym and a software development approach that means "Keep
+it short and simple". Different from other widget toolkits where one
+is supposed to choose from the existing widgets the one that fits one
+the best, in this toolkit, when there is no widget that satisfies all
+your needs, modify an existing widget, or write your own. Most other
+toolkits enable to write your own widgets, but it is not simple to do
+that, and they are not intended for that. The toolkit was made as simple
+as possible, to solve the problem of an immense complexity of most of the
+existing toolkits, which makes it impossible for many people to even use
+them. At that it was made universal, many simpler toolkits don't enable
+you to do many things that you want, due to their restricted internal
+design. This toolkit implements an original innovative approach for a
+widget toolkit, this new approach enabled to make the widget toolkit
+simpler. The toolkit is written in C, but it can also be used in C++.
 
 The widget toolkit is made as modifiable as possible, so that it will
 not stand on the way of doing what the user may want to do. The code of
 this widget toolkit is split into four files. The file kiss_widgets.c
 contains only the functions of the widgets, and none of the SDL functions
-or external library functions are directly used in that file. The three
+or external library functions are directly called in that file. The three
 other files serve as abstraction layers, and rewriting the functions
 in some of these files, enables to redefine how the operations that
 use the external library functions, are implemented. These three files
@@ -50,10 +50,10 @@ event processing funtions return 0.
 
 Every widget has three functions written for it, a function to create a
 new widget, a function to process the events, and a function to draw. The
-standard functions implemented for widgets, do all the automagical
-things, and the user can write one's own function, using a standard
-function inside it, to do any additional things that the user may want
-to do. See the examples and the header file kiss_sdl.h .
+base functions implemented for the widgets, do all the automagical things,
+and the user can write one's own function, using a base function inside
+it, to do any additional things that the user may want to do. See the
+examples and the header file kiss_sdl.h .
 
 Widgets can be made visible and invisible, an invisible widget is also
 inactive and doesn't perform any functions. In the examples, all widgets
@@ -72,7 +72,7 @@ window becomes not visible. That window is thus like a dialog window on
 which all the widgets in the dialog are drawn, the examples show how to
 do that. Some of these functions also have an additional argument named
 decorate, this determines whether the widget should be decorated by the
-standard function. The standard function draws a blue rectangle around
+default function. The default function draws a blue rectangle around
 the edge of the widget.
 
 In addition to visibility, the widgets also may or may not have
@@ -81,30 +81,31 @@ focus of the widget is determined by the focus of the window wdw. If this
 window is provided and has no focus, the focus of a widget is determined
 by the focus member of the structure of that widget.
 
-The event processing functions are called after each other in the event
-processing loop. The scrollbar, progressbar and combo box event functions
-are also called after the event processing loop with the event argument
-NULL. The standard function returns nonzero when an event happened in
-that widget which the user may want to additionally process. The event
+The event processing functions are called after each other in the
+event processing loop. The scrollbar, progressbar and combo box event
+functions are also called after the event processing loop with the event
+argument NULL. The base functions return nonzero when an event happened
+in the widget that the user may want to additionally process. The event
 functions have an additional argument, a pointer to an integer that is
 assigned a nonzero value when the widgets have to be redrawn.
 
-The drawing functions are called after each other in every cycle, after
-the event processing loop, when there is a need to redraw the widgets. The
-user may write ones own drawing functions and call the standard functions
-inside them, to do an additional drawing. The order of the drawing
-functions in the loop is important, the next functions draw over the
-drawing done by the previous functions. Especially when combo boxes are
-used, as their popup textboxes draw over the widgets below the combo box.
+The drawing functions are called after each other in every iteration,
+after the event processing loop, when there is a need to redraw the
+widgets. The user may write ones own drawing functions and call the
+base functions inside them, to do an additional drawing. The order of
+the drawing functions in the loop is important, the next functions draw
+over the drawing done by the previous functions. Especially when combo
+boxes are used, as their popup text boxes draw over the widgets below
+the combo box.
 
-Ten widgets are implemented as standard widgets, these are a window,
-multiline label, button, select button, vertical scrollbar, horizontal
-scrollbar, progress bar, entry box, textbox, and combo box. The two
-examples show how to use these widgets together. The first example
-implements a working file selection dialog with scrollable text boxes,
-the second example shows a use of a combo box. Likely most of the user
-interfaces can be made by using only these widgets, but the toolkit
-doesn't prevent adding any additional functionality.
+Ten widgets are implemented as base widgets, these are a window, multiline
+label, button, select button, vertical scrollbar, horizontal scrollbar,
+progress bar, entry box, text box, and combo box. The two examples
+show how to use these widgets together. The first example implements
+a working file selection dialog with scrollable text boxes, the second
+example shows a use of a combo box. Likely most of the user interfaces
+can be made by using only these widgets, but the toolkit doesn't prevent
+adding any additional functionality.
 
 Is it possible to make composite widgets from several other widgets? The
 widgets have coordinates relative to the main window, but it is possible
@@ -123,14 +124,14 @@ additional functionality can be added, such as clipboard, but what it
 may be depends on the particular needs.
 
 Is it possible to do the event processing in a separate function? Yes it
-is, but because of simplicity this has not been done in the examples of
-this toolkit. The general variable size array implemented in this toolkit,
-enables to add the widget structures to it, and pass them together to
-an external function. The variable size array also has an id number for
-every element, this enables to use unique numbers for every added widget,
-and by these numbers it is possible to identify these widgets in another
-function. Passing objects like that also makes a re-entrant or thread-safe
-code possible, also in this widget toolkit there is nothing central.
+is, by using separate event loops for different widgets, or by passing
+objects using a variable size array, but because of simplicity this
+has not been done in the examples of this toolkit. This also makes a
+re-entrant or thread-safe code possible, and also different widgets
+can then be drawn in different threads. In such widget toolkit there is
+essentially nothing central, except in that case a table may be necessary,
+that shows for every thread whether it has received an expose event and
+whether it has processed it.
 
 Can the images be compiled into the code, instead of being in separate
 files? Yes they can, images can be compiled into the C code, also Gimp
@@ -138,7 +139,7 @@ enables to save them directly in that way. Then with a special function
 they can be retrieved from the data in the code. But again because of
 simplicity, this has not been done in the examples of this toolkit.
 
-Can i use other colors, textures, etc? Yes. To use certain other fonts or
+Can i use other colors, images, etc? Yes. To use certain other fonts or
 textures, you may have to rewrite the init function. You can also draw
 anything you like on the widgets in the drawing function, this will be
 automatically redrawn every time after the window is exposed.
@@ -150,6 +151,9 @@ or what you can do. Just learn the basic things about how it works,
 the toolkit is simple and thus not difficult to learn, but it would be
 difficult to do what you want otherwise.
 
+kiss_sdl is fully capable of UTF-8 (8-bit Unicode). The rendered text,
+the keyboard input and also the C source code, all is in UTF-8.
+
 The kiss_sdl manual, including the full reference, Hello World example
 and example 2 tutorial, is at the following link.
 
@@ -159,16 +163,19 @@ https://raw.githubusercontent.com/actsl/kiss_sdl/master/kiss_manual.pdf
 INSTALL
 =======
 
-To maintain simplicity, no library has been made. To use it, copy all
-files to your project's directory and compile them with your code. The
+To maintain simplicity, no library has been made, but either a static or
+a dynamic library can be made, and the path to the resources (images and
+fonts) can be defined by adding a macro definition like -DRESDIR="./kiss/"
+to the compiler's command line. The simplest way to use it, is to copy
+all files to your project's directory and compile them with your code. The
  kiss_makefile compiles the examples that show all the widgets in
-the toolkit. The makefile was made for Linux, to use it in Windows,
-edit the makefile, comment the LDFLAGS, CFLAGS, EXE1 and EXE2, and
-uncomment the LDFLAGS, CFLAGS, EXE1 and EXE2 for Windows. Then change
-the paths to the directories under the folders where you installed your
-SDL development libraries. By default it is assumed that the libraries
-are installed under C:\\. The change may be simple, like only changing
-the version of the library from 2.0.4 to 2.0.6.
+the toolkit. The kiss_makefile was made for Linux, to use it in Windows,
+edit it, comment the LDFLAGS, CFLAGS, EXE1 and EXE2, and uncomment the
+LDFLAGS, CFLAGS, EXE1 and EXE2 for Windows. Then change the paths to the
+directories under the folders where you installed your SDL development
+libraries. By default it is assumed that the libraries are installed
+under C:\\. The change may be simple, like only changing the version of
+the library from 2.0.4 to 2.0.6.
 
 The common way in Windows is to copy all the dll-s from the proper bin
 directories (or library directories when using Visual Studio) of SDL,
@@ -191,11 +198,13 @@ make -f kiss_makefile
 
 mingw32-make -f kiss_makefile
 
+The kiss_sdl project page is https://github.com/actsl/kiss_sdl .
+
 
 VERSION
 =======
 
-0.8.14
+0.10.0
 
 
 LICENSE

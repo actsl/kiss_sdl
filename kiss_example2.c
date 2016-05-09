@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.8.14
+  kiss_sdl version 0.10.0
 */
 
 #include "kiss_sdl.h"
@@ -104,14 +104,16 @@ static void combobox_event(kiss_combobox *combobox, SDL_Event *e,
 		strcpy(entry->text, stext);
 		hscrollbar->fraction = 0.;
 		hscrollbar->step = 0.;
-		if (strlen(stext) - entry->textwidth / kiss_text_advance > 0)
+		if (strlen(stext) - entry->textwidth /
+			kiss_textfont.advance > 0)
 			hscrollbar->step = 1. / (strlen(stext) -
-				entry->textwidth / kiss_text_advance);
-		entry->text[entry->textwidth / kiss_text_advance] = 0;
+				entry->textwidth / kiss_textfont.advance);
+		entry->text[entry->textwidth / kiss_textfont.advance] = 0;
 		*draw = 1;
 	}
 }
 
+/* This is to show the hscrollbar, only works with ASCII characters */
 static void hscrollbar_event(kiss_hscrollbar *hscrollbar, SDL_Event *e,
 	char *stext, int *first, kiss_entry *entry, int *draw)
 {
@@ -119,13 +121,13 @@ static void hscrollbar_event(kiss_hscrollbar *hscrollbar, SDL_Event *e,
 
 	p = stext;
 	if (kiss_hscrollbar_event(hscrollbar, e, draw) && strlen(stext) -
-		entry->textwidth / kiss_text_advance > 0) {
+		entry->textwidth / kiss_textfont.advance > 0) {
 		*first = (int) ((strlen(stext) - entry->textwidth /
-		kiss_text_advance) * hscrollbar->fraction + 0.5);
+		kiss_textfont.advance) * hscrollbar->fraction + 0.5);
 		if (*first >= 0) {
 			strcpy(entry->text, p + *first);
 			entry->text[entry->textwidth /
-				kiss_text_advance] = 0;
+				kiss_textfont.advance] = 0;
 			*draw = 1;
 		}
 	}
@@ -172,31 +174,29 @@ int main(int argc, char **argv)
 		kiss_screen_height);
 	kiss_label_new(&label1, &window, "Population",
 		kiss_screen_width / 2 - (combobox_width +
-		kiss_vslider_width - kiss_edge) / 2 + kiss_edge,
-		6 * kiss_text_lineheight);
+		kiss_up.w - kiss_edge) / 2 + kiss_edge,
+		6 * kiss_textfont.lineheight);
 	kiss_selectbutton_new(&select1, &window,
-		label1.rect.x + combobox_width + kiss_vslider_width -
-		kiss_edge - kiss_selected_width, label1.rect.y +
-		kiss_text_lineheight - kiss_selected_height -
-		kiss_text_descent);
+		label1.rect.x + combobox_width + kiss_up.w -
+		kiss_edge - kiss_selected.w, label1.rect.y +
+		kiss_textfont.ascent - kiss_selected.h);
 	kiss_label_new(&label2, &window, "Area", label1.rect.x,
-		label1.rect.y + 2 * kiss_text_lineheight);
+		label1.rect.y + 2 * kiss_textfont.lineheight);
 	kiss_selectbutton_new(&select2, &window, select1.rect.x,
-		label2.rect.y + kiss_text_lineheight -
-		kiss_selected_height - kiss_text_descent);
+		label2.rect.y + kiss_textfont.ascent - kiss_selected.h);
 	kiss_combobox_new(&combobox, &window, "none", &a, label1.rect.x -
-		kiss_edge, label2.rect.y + 2 * kiss_text_lineheight,
+		kiss_edge, label2.rect.y + 2 * kiss_textfont.lineheight,
 		combobox_width, combobox_height);
 	kiss_entry_new(&entry, &window, 1, "",
 		kiss_screen_width / 2 - entry_width / 2 + kiss_edge,
 		combobox.entry.rect.y + combobox.entry.rect.h +
-		2 * kiss_text_lineheight + kiss_border, entry_width);
+		2 * kiss_textfont.lineheight + kiss_border, entry_width);
 	kiss_hscrollbar_new(&hscrollbar, &window, entry.rect.x,
 		entry.rect.y + entry.rect.h, entry.rect.w);
 	kiss_button_new(&button_ok, &window, "OK",
-		entry.rect.x + entry.rect.w - kiss_edge - kiss_button_width,
-		entry.rect.y + entry.rect.h + kiss_hslider_height +
-		2 * kiss_button_height);
+		entry.rect.x + entry.rect.w - kiss_edge - kiss_normal.w,
+		entry.rect.y + entry.rect.h + kiss_left.h +
+		2 * kiss_normal.h);
 
 	select1.selected = 1;
 	hscrollbar.step = 0.;

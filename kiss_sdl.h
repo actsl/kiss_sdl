@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.8.14
+  kiss_sdl version 0.10.0
 */
 
 #ifndef _kiss_sdl_h
@@ -27,6 +27,10 @@
 
 #ifdef __cplusplus
 extern "C" {
+#endif
+
+#ifndef RESDIR
+#define RESDIR ""
 #endif
 
 #ifdef _MSC_VER
@@ -50,14 +54,12 @@ extern "C" {
 #include <string.h>
 #include <stdio.h>
 
-#define KISS_MAX_LENGTH 100
+#define KISS_MAX_LENGTH 200
 #define KISS_MIN_LENGTH 10
 #define KISS_MAX_LABEL 500
 
 enum {OTHER_TYPE, WINDOW_TYPE, RENDERER_TYPE, TEXTURE_TYPE, SURFACE_TYPE,
 	FONT_TYPE, STRING_TYPE, ARRAY_TYPE};
-
-enum {TEXT_FONT, BUTTON_FONT};
 
 #ifdef _MSC_VER
 #ifdef _WIN32
@@ -90,6 +92,21 @@ typedef struct kiss_array {
 	int size;
 	int ref;
 } kiss_array;
+
+typedef struct kiss_image {
+	SDL_Texture *image;
+	int w;
+	int h;
+} kiss_image;
+
+typedef struct kiss_font {
+	TTF_Font *font;
+	int fontheight;
+	int spacing;
+	int lineheight;
+	int advance;
+	int ascent;
+} kiss_font;
 
 typedef struct kiss_window {
 	SDL_Rect rect;
@@ -223,25 +240,16 @@ typedef struct kiss_combobox {
 } kiss_combobox;
 
 SDL_Color kiss_white, kiss_black, kiss_green, kiss_blue, kiss_lightblue;
-TTF_Font *kiss_textfont, *kiss_buttonfont;
-SDL_Texture *kiss_normal, *kiss_prelight, *kiss_active, *kiss_bar,
-	*kiss_up, *kiss_down, *kiss_left, *kiss_right, *kiss_vslider,
-	*kiss_hslider, *kiss_unselected, *kiss_selected;
+kiss_font kiss_textfont, kiss_buttonfont;
+kiss_image kiss_normal, kiss_prelight, kiss_active, kiss_bar,
+	kiss_up, kiss_down, kiss_left, kiss_right, kiss_vslider,
+	kiss_hslider, kiss_selected, kiss_unselected;
 double kiss_spacing;
 int kiss_textfont_size, kiss_buttonfont_size;
 int kiss_click_interval, kiss_progress_interval;
 int kiss_slider_padding;
 int kiss_border, kiss_edge;
 int kiss_screen_width, kiss_screen_height;
-int kiss_text_advance, kiss_text_fontheight, kiss_text_descent;
-int kiss_text_spacing, kiss_text_lineheight;
-int kiss_button_texty;
-int kiss_button_advance;
-int kiss_button_width, kiss_button_height, kiss_selected_width,
-	kiss_selected_height, kiss_vslider_width, kiss_vslider_height,
-	kiss_up_height, kiss_down_height, kiss_hslider_width,
-	kiss_hslider_height, kiss_left_width, kiss_right_width,
-	kiss_bar_width, kiss_bar_height;
 
 char *kiss_getcwd(char *buf, int size);
 int kiss_chdir(char *path);
@@ -253,8 +261,9 @@ int kiss_isdir(kiss_stat s);
 int kiss_isreg(kiss_stat s);
 int kiss_makerect(SDL_Rect *rect, int x, int y, int h, int w);
 int kiss_pointinrect(int x, int y, SDL_Rect *rect);
-char *kiss_string_copy(char *dest, size_t size, char *source1,
-	char *source2);
+int kiss_utf8len(char *str);
+int kiss_utf8fix(char *str);
+char *kiss_string_copy(char *dest, size_t size, char *str1, char *str2);
 int kiss_string_compare(const void *a, const void *b);
 char *kiss_backspace(char *str);
 int kiss_array_new(kiss_array *a);
@@ -266,12 +275,13 @@ int kiss_array_appendstring(kiss_array *a, int id, char *text1, char *text2);
 int kiss_array_insert(kiss_array *a, int index, int id, void *data);
 int kiss_array_remove(kiss_array *a, int index);
 int kiss_array_free(kiss_array *a);
-int kiss_maxlength(int ftype, int width, char *str);
-int kiss_textwidth(int ftype, char *str1, char *str2);
-int kiss_rendertexture(SDL_Renderer *renderer, SDL_Texture *image,
+unsigned int kiss_getticks(void);
+int kiss_maxlength(kiss_font font, int width, char *str);
+int kiss_textwidth(kiss_font font, char *str1, char *str2);
+int kiss_renderimage(SDL_Renderer *renderer, kiss_image image,
 	int x, int y, SDL_Rect *clip);
 int kiss_rendertext(SDL_Renderer *renderer, char *text, int x, int y,
-	int ftype, SDL_Color color);
+	kiss_font font, SDL_Color color);
 int kiss_fillrect(SDL_Renderer *renderer, SDL_Rect *rect, SDL_Color color);
 int kiss_decorate(SDL_Renderer *renderer, SDL_Rect *rect, SDL_Color color,
 	int edge);

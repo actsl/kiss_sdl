@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.8.14
+  kiss_sdl version 0.10.0
 */
 
 #include "kiss_sdl.h"
@@ -40,7 +40,40 @@ int kiss_pointinrect(int x, int y, SDL_Rect *rect)
 		y >= rect->y && y < rect->y + rect->h;
 }
 
-char *kiss_string_copy(char *dest, size_t size, char *source1, char *source2)
+int kiss_utf8len(char *str)
+{
+	char *p;
+	int n;
+
+	if (!str) return -1;
+	n = 0;
+	for (p = str; *p; p++) {
+		n++;
+		if ((*p & 224) == 192)
+			n -= 1;
+		else if ((*p & 240) == 224)
+			n -= 2;
+		else if ((*p & 248) == 240)
+			n -= 3;
+	}
+	return n;
+}
+
+int kiss_utf8fix(char *str)
+{
+	int len, i;
+
+	if (!str || !str[0]) return -1;
+	len = strlen(str);
+	for (i = len - 1; i >= 0 && len - 1 - i < 3; i--) {
+		if ((str[i] & 224) == 192 && len - 1 - i < 1) str[i] = 0;
+		if ((str[i] & 240) == 224 && len - 1 - i < 2) str[i] = 0;
+		if ((str[i] & 248) == 240 && len - 1 - i < 3) str[i] = 0;
+	}
+	return 0;
+}
+
+char *kiss_string_copy(char *dest, size_t size, char *str1, char *str2)
 {
 	unsigned int len;
 	char *p;
@@ -48,13 +81,14 @@ char *kiss_string_copy(char *dest, size_t size, char *source1, char *source2)
 	if (!dest) return NULL;
 	strcpy(dest, "");
 	if (size < 2) return dest;
-	if (source1) strncpy(dest, source1, size);
+	if (str1) strncpy(dest, str1, size);
 	dest[size - 1] = 0;
 	len = strlen(dest);
-	if (!source2 || size - 1 <= len) return dest;
+	if (!str2 || size - 1 <= len) return dest;
 	p = dest;
-	strncpy(p + len, source2, size - len);
+	strncpy(p + len, str2, size - len);
 	dest[size - 1] = 0;
+	kiss_utf8fix(dest);
 	return dest;
 }
 
@@ -63,7 +97,6 @@ int kiss_string_compare(const void *a, const void *b)
 	return strcmp(*((char **) a), *((char **) b));
 }
 
-/* Can be rewritten for unicode, etc */
 char *kiss_backspace(char *str)
 {
 	int len;
@@ -71,6 +104,7 @@ char *kiss_backspace(char *str)
 	if (!str) return NULL;
 	if (!(len = strlen(str))) return NULL;
 	str[len - 1] = 0;
+	kiss_utf8fix(str);
 	return str; 
 }
 
