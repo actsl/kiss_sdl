@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.10.0
+  kiss_sdl version 0.10.2
 */
 
 #include "kiss_sdl.h"
@@ -44,35 +44,31 @@ unsigned int kiss_getticks(void)
 }
 
 /* Can be rewritten for proportional fonts */
-int kiss_maxlength(kiss_font font, int width, char *str)
+int kiss_maxlength(kiss_font font, int width, char *str1, char *str2)
 {
-	int last, n, i;
+	char buf[KISS_MAX_LENGTH];
+	int n, i;
 
 	n = 0;
-	last = 0;
-	if (!str) return -1;
-	/* Buffer length, text plus terminating '\0' */
-	for (i = 0; str[i] && i < KISS_MAX_LENGTH; i++)
-		if ((str[i] & 128) == 0 || (str[i] & 224) == 192 ||
-			(str[i] & 240) == 224 || (str[i] & 248) == 240) {
-			if (++n * font.advance > width)
-				return last + 2;
-			else
-				last = i;
-		}
-	return last + 2;
+	if (!str1 && !str2) return -1;
+	kiss_string_copy(buf, KISS_MAX_LENGTH, str1, str2);
+	/* Maximum length + 1 for '\0', by the rule */
+	for (i = 0; buf[i]; i += kiss_utf8next(buf, i))
+		if (++n * font.advance > width)
+			return i + 1;
+	return i + 1;
 }
 
-/* Can be rewritten for proportional fonts */
+/* Works also with proportional fonts */
 int kiss_textwidth(kiss_font font, char *str1, char *str2)
 {
-	int length;
+	char buf[KISS_MAX_LENGTH];
+	int width;
 
-	length = 0;
 	if (!str1 && !str2) return -1;
-	if (str1) length += kiss_utf8len(str1);
-	if (str2) length += kiss_utf8len(str2);
-	return length * font.advance;
+	kiss_string_copy(buf, KISS_MAX_LENGTH, str1, str2);
+	TTF_SizeUTF8(font.font, buf, &width, NULL);
+	return width;
 }
 
 int kiss_renderimage(SDL_Renderer *renderer, kiss_image image,

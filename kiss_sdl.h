@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.10.0
+  kiss_sdl version 0.10.2
 */
 
 #ifndef _kiss_sdl_h
@@ -261,7 +261,8 @@ int kiss_isdir(kiss_stat s);
 int kiss_isreg(kiss_stat s);
 int kiss_makerect(SDL_Rect *rect, int x, int y, int h, int w);
 int kiss_pointinrect(int x, int y, SDL_Rect *rect);
-int kiss_utf8len(char *str);
+int kiss_utf8next(char *str, int index);
+int kiss_utf8prev(char *str, int index);
 int kiss_utf8fix(char *str);
 char *kiss_string_copy(char *dest, size_t size, char *str1, char *str2);
 int kiss_string_compare(const void *a, const void *b);
@@ -276,7 +277,7 @@ int kiss_array_insert(kiss_array *a, int index, int id, void *data);
 int kiss_array_remove(kiss_array *a, int index);
 int kiss_array_free(kiss_array *a);
 unsigned int kiss_getticks(void);
-int kiss_maxlength(kiss_font font, int width, char *str);
+int kiss_maxlength(kiss_font font, int width, char *str1, char *str2);
 int kiss_textwidth(kiss_font font, char *str1, char *str2);
 int kiss_renderimage(SDL_Renderer *renderer, kiss_image image,
 	int x, int y, SDL_Rect *clip);

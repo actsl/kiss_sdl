@@ -2,12 +2,13 @@ C = gcc
 #LDFLAGS = -LC:\SDL2-2.0.4\i686-w64-mingw32\lib \
 -LC:\SDL2_ttf-2.0.14\i686-w64-mingw32\lib \
 -LC:\SDL2_image-2.0.1\i686-w64-mingw32\lib \
--lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
+-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf \
+-mwindows
 #CFLAGS = -IC:\SDL2-2.0.4\include \
 -IC:\SDL2-2.0.4\i686-w64-mingw32\include \
 -IC:\SDL2_ttf-2.0.14\i686-w64-mingw32\include \
 -IC:\SDL2_image-2.0.1\i686-w64-mingw32\include \
--Wall -c -std=c89
+-Wall -c -std=c89 -mwindows
 #EXE1 = kiss_example1.exe
 #EXE2 = kiss_example2.exe
 LDFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf
@@ -45,4 +46,7 @@ kiss_posix.o: kiss_posix.c
 
 clean:
 	rm *.o && rm $(EXE1) && rm $(EXE2)
+#	del *.o
+#	del $(EXE1)
+#	del $(EXE2)
 

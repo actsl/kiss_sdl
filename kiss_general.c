@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.10.0
+  kiss_sdl version 0.10.2
 */
 
 #include "kiss_sdl.h"
@@ -40,23 +40,34 @@ int kiss_pointinrect(int x, int y, SDL_Rect *rect)
 		y >= rect->y && y < rect->y + rect->h;
 }
 
-int kiss_utf8len(char *str)
+int kiss_utf8next(char *str, int index)
 {
-	char *p;
-	int n;
+	int i;
 
-	if (!str) return -1;
-	n = 0;
-	for (p = str; *p; p++) {
-		n++;
-		if ((*p & 224) == 192)
-			n -= 1;
-		else if ((*p & 240) == 224)
-			n -= 2;
-		else if ((*p & 248) == 240)
-			n -= 3;
-	}
-	return n;
+	if (!str || index < 0) return -1;
+	if (!str[index]) return 0;
+	for (i = 1; str[index + i]; i++)
+		if ((str[index + i] & 128) == 0 ||
+			(str[index + i] & 224) == 192 ||
+			(str[index + i] & 240) == 224 ||
+			(str[index + i] & 248) == 240)
+			break;
+	return i;
+}
+
+int kiss_utf8prev(char *str, int index)
+{
+	int i;
+
+	if (!str || index < 0) return -1;
+	if (!index) return 0;
+	for (i = 1; index - i; i++)
+		if ((str[index - i] & 128) == 0 ||
+			(str[index - i] & 224) == 192 ||
+			(str[index - i] & 240) == 224 ||
+			(str[index - i] & 248) == 240)
+			break;
+	return i;
 }
 
 int kiss_utf8fix(char *str)

@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.10.0
+  kiss_sdl version 0.10.2
 */
 
 #include "kiss_sdl.h"
@@ -152,8 +152,9 @@ static void button_ok1_event(kiss_button *button, SDL_Event *e,
 	char buf[KISS_MAX_LENGTH];
 
 	if (kiss_button_event(button, e, draw)) {
-		kiss_string_copy(buf, (window2->rect.w -
-			2 * kiss_vslider.w) / kiss_textfont.advance,
+		kiss_string_copy(buf, kiss_maxlength(kiss_textfont,
+			window2->rect.w - 2 * kiss_vslider.w,
+			label_sel->text, entry->text),
 			label_sel->text, entry->text);
 		kiss_string_copy(label_res->text, KISS_MAX_LABEL, 
 			"The following path was selected:\n", buf);

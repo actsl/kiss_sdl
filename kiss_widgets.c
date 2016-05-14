@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.10.0
+  kiss_sdl version 0.10.2
 */
 
 #include "kiss_sdl.h"
@@ -291,15 +291,21 @@ int kiss_vscrollbar_event(kiss_vscrollbar *vscrollbar, SDL_Event *event,
 	if (event->type == SDL_MOUSEBUTTONDOWN &&
 		kiss_pointinrect(event->button.x, event->button.y,
 		&vscrollbar->uprect) && vscrollbar->step > 0.000001) {
-		if (vscrollbar->fraction > 0.000001)
+		if (vscrollbar->fraction > 0.000001) {
 			vscrollbar->upclicked = 1;
+			if (vscrollbar->wdw) vscrollbar->wdw->focus = 0;
+			vscrollbar->focus = 1;
+		}
 		vscrollbar->lasttick = kiss_getticks() -
 			kiss_click_interval - 1;
 	} else if (event->type == SDL_MOUSEBUTTONDOWN &&
 		kiss_pointinrect(event->button.x, event->button.y,
 		&vscrollbar->downrect) && vscrollbar->step > 0.000001) {
-		if (vscrollbar->fraction < 0.999999)
+		if (vscrollbar->fraction < 0.999999) {
 			vscrollbar->downclicked = 1;
+			if (vscrollbar->wdw) vscrollbar->wdw->focus = 0;
+			vscrollbar->focus = 1;
+		}
 		vscrollbar->lasttick = kiss_getticks() -
 			kiss_click_interval - 1;
 	} else if (event->type == SDL_MOUSEBUTTONDOWN &&
@@ -413,15 +419,21 @@ int kiss_hscrollbar_event(kiss_hscrollbar *hscrollbar, SDL_Event *event,
 	if (event->type == SDL_MOUSEBUTTONDOWN &&
 		kiss_pointinrect(event->button.x, event->button.y,
 		&hscrollbar->leftrect)) {
-		if (hscrollbar->fraction > 0.000001)
+		if (hscrollbar->fraction > 0.000001) {
 			hscrollbar->leftclicked = 1;
+			if (hscrollbar->wdw) hscrollbar->wdw->focus = 0;
+			hscrollbar->focus = 1;
+		}
 		hscrollbar->lasttick = kiss_getticks() -
 			kiss_click_interval - 1;
 	} else if (event->type == SDL_MOUSEBUTTONDOWN &&
 		kiss_pointinrect(event->button.x, event->button.y,
 		&hscrollbar->rightrect) && hscrollbar->step > 0.000001) {
-		if (hscrollbar->fraction < 0.999999)
+		if (hscrollbar->fraction < 0.999999) {
 			hscrollbar->rightclicked = 1;
+			if (hscrollbar->wdw) hscrollbar->wdw->focus = 0;
+			hscrollbar->focus = 1;
+		}
 		hscrollbar->lasttick = kiss_getticks() -
 			kiss_click_interval - 1;
 	} else if (event->type == SDL_MOUSEBUTTONDOWN &&
@@ -530,7 +542,7 @@ int kiss_entry_new(kiss_entry *entry, kiss_window *wdw, int decorate,
 	entry->activecolor = kiss_blue;
 	entry->textwidth = w - 2 * kiss_border;
 	kiss_string_copy(entry->text, kiss_maxlength(kiss_textfont,
-		entry->textwidth, text), text, NULL);
+		entry->textwidth, text, NULL), text, NULL);
 	kiss_makerect(&entry->rect, x, y, w, kiss_textfont.fontheight +
 		2 * kiss_border);
 	entry->decorate = decorate;
@@ -708,7 +720,7 @@ int kiss_textbox_draw(kiss_textbox *textbox, SDL_Renderer *renderer)
 		kiss_string_copy(buf, kiss_maxlength(kiss_textfont,
 			textbox->textwidth,
 			(char *) kiss_array_data(textbox->array,
-			textbox->firstline + i)),
+			textbox->firstline + i), NULL),
 			(char *) kiss_array_data(textbox->array,
 			textbox->firstline + i), NULL);
 		kiss_rendertext(renderer, buf, textbox->textrect.x,
@@ -790,7 +802,7 @@ int kiss_combobox_event(kiss_combobox *combobox, SDL_Event *event, int *draw)
 			kiss_maxlength(kiss_textfont,
 			combobox->entry.textwidth,
 			(char *) kiss_array_data(combobox->textbox.array,
-			index)),
+			index), NULL),
 			(char *) kiss_array_data(combobox->textbox.array,
 			index), NULL);
 		*draw = 1;

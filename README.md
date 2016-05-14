@@ -163,19 +163,19 @@ https://raw.githubusercontent.com/actsl/kiss_sdl/master/kiss_manual.pdf
 INSTALL
 =======
 
-To maintain simplicity, no library has been made, but either a static or
-a dynamic library can be made, and the path to the resources (images and
-fonts) can be defined by adding a macro definition like -DRESDIR="./kiss/"
-to the compiler's command line. The simplest way to use it, is to copy
-all files to your project's directory and compile them with your code. The
- kiss_makefile compiles the examples that show all the widgets in
-the toolkit. The kiss_makefile was made for Linux, to use it in Windows,
-edit it, comment the LDFLAGS, CFLAGS, EXE1 and EXE2, and uncomment the
-LDFLAGS, CFLAGS, EXE1 and EXE2 for Windows. Then change the paths to the
-directories under the folders where you installed your SDL development
-libraries. By default it is assumed that the libraries are installed
-under C:\\. The change may be simple, like only changing the version of
-the library from 2.0.4 to 2.0.6.
+To maintain simplicity, no library has been made, but either a static
+or a dynamic library can be made, and the path to the resources
+(images and fonts) can be defined by adding a macro definition like
+-DRESDIR=\\"kiss/\\" to the compiler's command line. The simplest way
+to use it, is to copy all files to your project's directory and compile
+them with your code. The kiss_makefile compiles the examples that show
+all the widgets in the toolkit. The kiss_makefile was made for Linux, to
+use it in Windows, edit it, comment the LDFLAGS, CFLAGS, EXE1 and EXE2,
+and uncomment the LDFLAGS, CFLAGS, EXE1 and EXE2 for Windows. Then change
+the paths to the directories under the folders where you installed your
+SDL development libraries. By default it is assumed that the libraries
+are installed under C:\\. The change may be simple, like only changing
+the version of the library from 2.0.4 to 2.0.6.
 
 The common way in Windows is to copy all the dll-s from the proper bin
 directories (or library directories when using Visual Studio) of SDL,
@@ -204,7 +204,7 @@ The kiss_sdl project page is https://github.com/actsl/kiss_sdl .
 VERSION
 =======
 
-0.10.0
+0.10.2
 
 
 LICENSE
