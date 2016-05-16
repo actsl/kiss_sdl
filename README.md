@@ -185,12 +185,12 @@ directory, but then they may have to be replaced when using different
 versions of SDL.
 
 In Windows, this toolkit was tested with MinGW64, MinGW32 should also
-work, and in the Visual Studio Community 2015. The project files for the
-Visual Studio are provided, but a similar changes to the library paths
-should be made, as described above, in the project -> properties ->
-configuration properties -> vc++ directories. For compiling in Visual
-Studio, run kiss_example1.vcxproj or kiss_example2.vcxproj, make sure
-that on toolbar x64 or x86 is selected, it was tested with x86, then
+work, and in the Visual Studio Community 2015 in 32 bit Windows 7. The
+project files for the Visual Studio are provided, but a similar changes
+to the library paths should be made, as described above, in the project ->
+properties -> configuration properties -> vc++ directories. For compiling
+in Visual Studio, run kiss_example1.vcxproj or kiss_example2.vcxproj,
+make sure that on toolbar x86 is selected, it was tested with x86, then
 build. Use one of the following commands to compile either in Linux,
 or in Windows using MinGW.
 
