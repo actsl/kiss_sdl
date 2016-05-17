@@ -196,12 +196,13 @@ with C:\\mingw32\\bin added to the PATH), which is a 32 bit version of
 MinGW-w64 . Other versions of MinGW should also work, but they are not
 tested, and kiss_makefile corresponds to a 32 bit version of MinGW. If
 a 64 bit version of MinGW is used, then the paths have to be changed to
-the paths of the 64 bit versions of the SDL libraries, as said above. It
-was also tested in the Visual Studio Community 2015. The project files
-for the Visual Studio are provided, but a similar changes to the library
-paths should be made, as described above, in the project -> properties ->
-configuration properties -> vc++ directories. The paths of the 64 bit
-SDL2 libraries for x64 are entered, but it is not tested with x64.
+the paths of the 64 bit versions of the SDL libraries, as said above,
+also the -march=i686 arguments have to be deleted. It was also tested
+in the Visual Studio Community 2015. The project files for the Visual
+Studio are provided, but a similar changes to the library paths should be
+made, as described above, in the project -> properties -> configuration
+properties -> vc++ directories. The paths of the 64 bit SDL2 libraries
+for x64 are entered, but it is not tested with x64.
 
 For compiling in Visual Studio, run kiss_example1.vcxproj or
 kiss_example2.vcxproj, make sure that on toolbar x86 is selected (instead
