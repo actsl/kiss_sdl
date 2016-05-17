@@ -168,31 +168,45 @@ or a dynamic library can be made, and the path to the resources
 (images and fonts) can be defined by adding a macro definition like
 -DRESDIR=\\"kiss/\\" to the compiler's command line. The simplest way
 to use it, is to copy all files to your project's directory and compile
-them with your code. The kiss_makefile compiles the examples that show
-all the widgets in the toolkit. The kiss_makefile was made for Linux, to
-use it in Windows, edit it, comment the LDFLAGS, CFLAGS, EXE1 and EXE2,
-and uncomment the LDFLAGS, CFLAGS, EXE1 and EXE2 for Windows. Then change
-the paths to the directories under the folders where you installed your
-SDL development libraries. By default it is assumed that the libraries
-are installed under C:\\. The change may be simple, like only changing
-the version of the library from 2.0.4 to 2.0.6.
+them with your code.
 
 The common way in Windows is to copy all the dll-s from the proper bin
 directories (or library directories when using Visual Studio) of SDL,
 SDL_image and SDL_ttf, to your project's directory, this is how SDL
 programs are usually distributed. Or copy them to the Windows system
 directory, but then they may have to be replaced when using different
-versions of SDL.
+versions of SDL2.
 
-In Windows, this toolkit was tested with MinGW64, MinGW32 should also
-work, and in the Visual Studio Community 2015 in 32 bit Windows. The
-project files for the Visual Studio are provided, but a similar changes
-to the library paths should be made, as described above, in the project ->
-properties -> configuration properties -> vc++ directories. For compiling
-in Visual Studio, run kiss_example1.vcxproj or kiss_example2.vcxproj,
-make sure that on toolbar x86 is selected, it was tested with x86, then
-build. Use one of the following commands to compile either in Linux,
-or in Windows using MinGW.
+The kiss_makefile compiles the examples that show all the widgets in
+the toolkit. The kiss_makefile was made for Linux, to use it in Windows,
+edit it, comment the LDFLAGS, CFLAGS, EXE1 and EXE2, and uncomment the
+LDFLAGS, CFLAGS, EXE1 and EXE2 for Windows. Then change the paths to the
+directories under the folders where you installed your SDL development
+libraries. By default, it is assumed that the libraries are installed
+under C:\\. The change may be simple, like only changing the version of
+the library from 2.0.4 to 2.0.6. But when you have a 64 bit Windows and
+want to compile 64 bit code (which should work but is not tested), the
+paths also have to be changed to 64 bit SDL2 libraries. One directory
+in all these paths is  i686-w64-mingw32 , for 64 bit code this should
+everywhere be changed to  x86_64-w64-mingw32 .
+
+In Windows, this toolkit was tested with MinGW-w64, installed from the
+file i686-5.3.0-release-posix-dwarf-rt_v4-rev0.7z (extracted to C:\\ ,
+with C:\\mingw32\\bin added to the PATH), which is a 32 bit version of
+MinGW-w64 . Other versions of MinGW should also work, but they are not
+tested, and kiss_makefile corresponds to a 32 bit version of MinGW. If
+a 64 bit version of MinGW is used, then the paths have to be changed to
+the paths of the 64 bit versions of the SDL libraries, as said above. It
+was also tested in the Visual Studio Community 2015. The project files
+for the Visual Studio are provided, but a similar changes to the library
+paths should be made, as described above, in the project -> properties ->
+configuration properties -> vc++ directories. The paths of the 64 bit
+SDL2 libraries for x64 are entered, but it is not tested with x64.
+
+For compiling in Visual Studio, run kiss_example1.vcxproj or
+kiss_example2.vcxproj, make sure that on toolbar x86 is selected (instead
+of x64), it was tested with x86, then build. Use one of the following
+commands to compile either in Linux, or in Windows using MinGW.
 
 make -f kiss_makefile
 
@@ -204,7 +218,7 @@ The kiss_sdl project page is https://github.com/actsl/kiss_sdl .
 VERSION
 =======
 
-0.10.2
+0.10.4
 
 
 LICENSE

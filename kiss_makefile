@@ -3,12 +3,12 @@ C = gcc
 -LC:\SDL2_ttf-2.0.14\i686-w64-mingw32\lib \
 -LC:\SDL2_image-2.0.1\i686-w64-mingw32\lib \
 -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf \
--mwindows
+-mwindows -march=i686
 #CFLAGS = -IC:\SDL2-2.0.4\include \
 -IC:\SDL2-2.0.4\i686-w64-mingw32\include \
 -IC:\SDL2_ttf-2.0.14\i686-w64-mingw32\include \
 -IC:\SDL2_image-2.0.1\i686-w64-mingw32\include \
--Wall -c -std=c89 -mwindows
+-Wall -c -std=c89 -march=i686
 #EXE1 = kiss_example1.exe
 #EXE2 = kiss_example2.exe
 LDFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf
