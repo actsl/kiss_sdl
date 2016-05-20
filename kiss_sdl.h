@@ -239,16 +239,14 @@ typedef struct kiss_combobox {
 	kiss_window *wdw;
 } kiss_combobox;
 
-SDL_Color kiss_white, kiss_black, kiss_green, kiss_blue, kiss_lightblue;
+extern SDL_Color kiss_white, kiss_black, kiss_green, kiss_blue, kiss_lightblue;
 kiss_font kiss_textfont, kiss_buttonfont;
-kiss_image kiss_normal, kiss_prelight, kiss_active, kiss_bar,
-	kiss_up, kiss_down, kiss_left, kiss_right, kiss_vslider,
-	kiss_hslider, kiss_selected, kiss_unselected;
-double kiss_spacing;
-int kiss_textfont_size, kiss_buttonfont_size;
-int kiss_click_interval, kiss_progress_interval;
-int kiss_slider_padding;
-int kiss_border, kiss_edge;
+kiss_image kiss_normal, kiss_prelight, kiss_active, kiss_bar, kiss_up, kiss_down, kiss_left, kiss_right, kiss_vslider, kiss_hslider, kiss_selected, kiss_unselected;
+extern double kiss_spacing;
+extern int kiss_textfont_size, kiss_buttonfont_size;
+extern int kiss_click_interval, kiss_progress_interval;
+extern int kiss_slider_padding;
+extern int kiss_border, kiss_edge;
 int kiss_screen_width, kiss_screen_height;
 
 char *kiss_getcwd(char *buf, int size);
