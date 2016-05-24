@@ -25,6 +25,10 @@
 #ifndef _kiss_sdl_h
 #define _kiss_sdl_h
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef RESDIR
 #define RESDIR ""
 #endif
@@ -347,6 +351,10 @@ int kiss_combobox_new(kiss_combobox *combobox, kiss_window *wdw,
 int kiss_combobox_event(kiss_combobox *combobox, SDL_Event *event,
 	int *draw);
 int kiss_combobox_draw(kiss_combobox *combobox, SDL_Renderer *renderer);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* _kiss_sdl_h */
 
