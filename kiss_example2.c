@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.10.4
+  kiss_sdl version 0.10.6
 */
 
 #include "kiss_sdl.h"
@@ -84,7 +84,7 @@ static void combobox_event(kiss_combobox *combobox, SDL_Event *e,
 
 	s = combobox->entry.text;
 	if (kiss_combobox_event(combobox, e, draw)) {
-		if ((p = bsearch(&s, combobox->textbox.array->data,
+		if ((p = (void **) bsearch(&s, combobox->textbox.array->data,
 			combobox->textbox.array->length, sizeof(void *),
 			kiss_string_compare))) {
 			i = p - combobox->textbox.array->data;

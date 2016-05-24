@@ -19,11 +19,16 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.10.4
+  kiss_sdl version 0.10.6
 */
 
 #include "kiss_sdl.h"
 
+kiss_font kiss_textfont, kiss_buttonfont;
+kiss_image kiss_normal, kiss_prelight, kiss_active, kiss_bar,
+	kiss_up, kiss_down, kiss_left, kiss_right, kiss_vslider,
+	kiss_hslider, kiss_selected, kiss_unselected;
+int kiss_screen_width, kiss_screen_height;
 int kiss_textfont_size = 15;
 int kiss_buttonfont_size = 12;
 int kiss_click_interval = 140;

@@ -19,15 +19,11 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.10.4
+  kiss_sdl version 0.10.6
 */
 
 #ifndef _kiss_sdl_h
 #define _kiss_sdl_h
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #ifndef RESDIR
 #define RESDIR ""
@@ -239,6 +235,20 @@ typedef struct kiss_combobox {
 	kiss_window *wdw;
 } kiss_combobox;
 
+#ifdef __cplusplus
+extern SDL_Color kiss_white, kiss_black, kiss_green, kiss_blue,
+		kiss_lightblue;
+extern kiss_font kiss_textfont, kiss_buttonfont;
+extern kiss_image kiss_normal, kiss_prelight, kiss_active, kiss_bar,
+	kiss_up, kiss_down, kiss_left, kiss_right, kiss_vslider,
+	kiss_hslider, kiss_selected, kiss_unselected;
+extern double kiss_spacing;
+extern int kiss_textfont_size, kiss_buttonfont_size;
+extern int kiss_click_interval, kiss_progress_interval;
+extern int kiss_slider_padding;
+extern int kiss_border, kiss_edge;
+extern int kiss_screen_width, kiss_screen_height;
+#else
 SDL_Color kiss_white, kiss_black, kiss_green, kiss_blue, kiss_lightblue;
 kiss_font kiss_textfont, kiss_buttonfont;
 kiss_image kiss_normal, kiss_prelight, kiss_active, kiss_bar,
@@ -250,6 +260,7 @@ int kiss_click_interval, kiss_progress_interval;
 int kiss_slider_padding;
 int kiss_border, kiss_edge;
 int kiss_screen_width, kiss_screen_height;
+#endif
 
 char *kiss_getcwd(char *buf, int size);
 int kiss_chdir(char *path);
@@ -336,10 +347,6 @@ int kiss_combobox_new(kiss_combobox *combobox, kiss_window *wdw,
 int kiss_combobox_event(kiss_combobox *combobox, SDL_Event *event,
 	int *draw);
 int kiss_combobox_draw(kiss_combobox *combobox, SDL_Renderer *renderer);
-
-#ifdef __cplusplus
-};
-#endif
 
 #endif /* _kiss_sdl_h */
 

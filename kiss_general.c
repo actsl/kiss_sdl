@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.10.4
+  kiss_sdl version 0.10.6
 */
 
 #include "kiss_sdl.h"
@@ -125,8 +125,8 @@ int kiss_array_new(kiss_array *a)
 	a->size = KISS_MIN_LENGTH;
 	a->length = 0;
 	a->ref = 1;
-	a->data = malloc(KISS_MIN_LENGTH * sizeof(void *));
-	a->id = malloc(KISS_MIN_LENGTH * sizeof(int));
+	a->data = (void **) malloc(KISS_MIN_LENGTH * sizeof(void *));
+	a->id = (int *) malloc(KISS_MIN_LENGTH * sizeof(int));
 	return 0;
 }
 
@@ -158,8 +158,9 @@ int kiss_array_append(kiss_array *a, int id, void *data)
 	if (!a) return -1;
 	if (a->length >= a->size) {
 		a->size *= 2;
-		a->data = realloc(a->data, a->size * sizeof(void *));
-		a->id = realloc(a->id, a->size * sizeof(int));
+		a->data = (void **) realloc(a->data,
+			a->size * sizeof(void *));
+		a->id = (int *) realloc(a->id, a->size * sizeof(int));
 		for (i = a->length; i < a->size; i++) {
 			a->data[i] = NULL;
 			a->id[i] = 0;
@@ -176,7 +177,7 @@ int kiss_array_appendstring(kiss_array *a, int id, char *text1, char *text2)
 	char *p;
 
 	if (!a) return -1;
-	p = malloc(KISS_MAX_LENGTH);
+	p = (char *) malloc(KISS_MAX_LENGTH);
 	kiss_string_copy(p, KISS_MAX_LENGTH, text1, text2);
 	kiss_array_append(a, id, p);
 	return 0;
@@ -189,8 +190,9 @@ int kiss_array_insert(kiss_array *a, int index, int id, void *data)
 	if (!a || index < 0 || index >= a->length) return -1;
 	if (a->length >= a->size) {
 		a->size *= 2;
-		a->data = realloc(a->data, a->size * sizeof(void *));
-		a->id = realloc(a->id, a->size * sizeof(int));
+		a->data = (void **) realloc(a->data,
+			a->size * sizeof(void *));
+		a->id = (int *) realloc(a->id, a->size * sizeof(int));
 		for (i = a->length; i < a->size; i++) {
 			a->data[i] = NULL;
 			a->id[i] = 0;

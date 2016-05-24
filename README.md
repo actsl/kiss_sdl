@@ -46,7 +46,7 @@ The global variables are not declared as constant, to make the code more
 easily modifiable, but they should be used as constants, by changing
 them only during the initialization. In case of an error, the functions of
 this toolkit return -1 or NULL, depending on the return type, and the
-event processing funtions return 0.
+event processing functions return 0.
 
 Every widget has three functions written for it, a function to create a
 new widget, a function to process the events, and a function to draw. The
@@ -177,37 +177,36 @@ programs are usually distributed. Or copy them to the Windows system
 directory, but then they may have to be replaced when using different
 versions of SDL2.
 
-The kiss_makefile compiles the examples that show all the widgets in
-the toolkit. The kiss_makefile was made for Linux, to use it in Windows,
-edit it, comment the LDFLAGS, CFLAGS, EXE1 and EXE2, and uncomment the
-LDFLAGS, CFLAGS, EXE1 and EXE2 for Windows. Then change the paths to the
-directories under the folders where you installed your SDL development
+The kiss_makefile compiles the examples that show all the widgets in the
+toolkit. The kiss_makefile was made for Linux, to use it in Windows, edit
+it, comment the lines LDFLAGS, CFLAGS, EXE1 and EXE2, and uncomment the
+corresponding lines for 32 bit Windows or 64 bit Windows. Then change the
+paths to the directories under which you installed the SDL2 development
 libraries. By default, it is assumed that the libraries are installed
-under C:\\. The change may be simple, like only changing the version of
-the library from 2.0.4 to 2.0.6. But when you have a 64 bit Windows and
-want to compile 64 bit code (which should work but is not tested), the
-paths also have to be changed to 64 bit SDL2 libraries. One directory
-in all these paths is  i686-w64-mingw32 , for 64 bit code this should
-everywhere be changed to  x86_64-w64-mingw32 .
+under C:\\. No change may be necessary, or the change may be simple,
+like only changing the version of the library from 2.0.4 to 2.0.6.
 
 In Windows, this toolkit was tested with MinGW-w64, installed from the
-file i686-5.3.0-release-posix-dwarf-rt_v4-rev0.7z (extracted to C:\\ ,
+file i686-5.3.0-release-posix-dwarf-rt_v4-rev0.7z (extracted to C:\\
 with C:\\mingw32\\bin added to the PATH), which is a 32 bit version of
 MinGW-w64 . Other versions of MinGW should also work, but they are not
-tested, and kiss_makefile corresponds to a 32 bit version of MinGW. If
-a 64 bit version of MinGW is used, then the paths have to be changed to
-the paths of the 64 bit versions of the SDL libraries, as said above,
-also the -march=i686 arguments have to be deleted. It was also tested
-in the Visual Studio Community 2015. The project files for the Visual
-Studio are provided, but a similar changes to the library paths should be
-made, as described above, in the project -> properties -> configuration
-properties -> vc++ directories. The paths of the 64 bit SDL2 libraries
-for x64 are entered, but it is not tested with x64.
+tested. A 32 bit compiler also works with 64 bit Windows, but a 64 bit
+compiler cannot be used with 32 bit Windows. For compiling in C++, remove
+the -std=c89 compiler option, then comment the C compiler line, uncomment
+the C++ compiler line, and make. The C compilers are gcc and clang
+(when the extension is c), and the C++ compilers are g++ and clang++.
+
+It was also tested in the Visual Studio Community 2015. The project files
+for the Visual Studio are provided, but a similar changes to the library
+paths should be made if necessary, as described above, in the project ->
+properties -> configuration properties -> vc++ directories. The paths
+of the 64 bit SDL2 libraries for x64 are entered, but it was not tested
+with x64.
 
 For compiling in Visual Studio, run kiss_example1.vcxproj or
-kiss_example2.vcxproj, make sure that on toolbar x86 is selected (instead
-of x64), it was tested with x86, then build. Use one of the following
-commands to compile either in Linux, or in Windows using MinGW.
+kiss_example2.vcxproj, make sure that on the toolbar x86 is selected
+(instead of x64), it was tested with x86, then build. Use one of the
+following commands to compile either in Linux, or in Windows using MinGW.
 
 make -f kiss_makefile
 
@@ -219,7 +218,7 @@ The kiss_sdl project page is https://github.com/actsl/kiss_sdl .
 VERSION
 =======
 
-0.10.4
+0.10.6
 
 
 LICENSE
