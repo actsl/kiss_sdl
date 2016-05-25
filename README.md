@@ -191,10 +191,7 @@ file i686-5.3.0-release-posix-dwarf-rt_v4-rev0.7z (extracted to C:\\
 with C:\\mingw32\\bin added to the PATH), which is a 32 bit version of
 MinGW-w64 . Other versions of MinGW should also work, but they are not
 tested. A 32 bit compiler also works with 64 bit Windows, but a 64 bit
-compiler cannot be used with 32 bit Windows. For compiling in C++, remove
-the -std=c89 compiler option, then comment the C compiler line, uncomment
-the C++ compiler line, and make. The C compilers are gcc and clang
-(when the extension is c), and the C++ compilers are g++ and clang++.
+compiler cannot be used with 32 bit Windows.
 
 It was also tested in the Visual Studio Community 2015. The project files
 for the Visual Studio are provided, but a similar changes to the library
@@ -218,7 +215,7 @@ The kiss_sdl project page is https://github.com/actsl/kiss_sdl .
 VERSION
 =======
 
-0.10.6
+0.10.8
 
 
 LICENSE

@@ -1,4 +1,4 @@
-#C = g++
+CPP = g++
 C = gcc
 
 ### 32 bit Windows
