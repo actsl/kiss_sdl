@@ -209,8 +209,6 @@ make -f kiss_makefile
 
 mingw32-make -f kiss_makefile
 
-A version of the project using CMake https://github.com/actsl/kiss_sdl/files/283114/cmakekiss.zip .
-
 The kiss_sdl project page is https://github.com/actsl/kiss_sdl .
 
 
