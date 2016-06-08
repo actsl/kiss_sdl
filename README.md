@@ -215,7 +215,7 @@ The kiss_sdl project page is https://github.com/actsl/kiss_sdl .
 VERSION
 =======
 
-1.0.0
+1.0.2
 
 
 LICENSE
