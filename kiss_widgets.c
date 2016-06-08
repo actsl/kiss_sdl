@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.10.8
+  kiss_sdl version 1.0.0
 */
 
 #include "kiss_sdl.h"
@@ -512,7 +512,7 @@ int kiss_progressbar_event(kiss_progressbar *progressbar, SDL_Event *event,
 	return 1;
 }
 
-int kiss_pogressbar_draw(kiss_progressbar *progressbar,
+int kiss_progressbar_draw(kiss_progressbar *progressbar,
 	SDL_Renderer *renderer)
 {
 	SDL_Rect clip;

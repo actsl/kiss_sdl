@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.10.8
+  kiss_sdl version 1.0.0
 */
 
 #ifndef _kiss_sdl_h
@@ -322,7 +322,7 @@ int kiss_progressbar_new(kiss_progressbar *progressbar, kiss_window *wdw,
 	int x, int y, int w);
 int kiss_progressbar_event(kiss_progressbar *progressbar, SDL_Event *event,
 	int *draw);
-int kiss_pogressbar_draw(kiss_progressbar *progressbar,
+int kiss_progressbar_draw(kiss_progressbar *progressbar,
 	SDL_Renderer *renderer);
 int kiss_entry_new(kiss_entry *entry, kiss_window *wdw, int decorate,
 	char *text, int x, int y, int w);

@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 0.10.8
+  kiss_sdl version 1.0.0
 */
 
 #include "kiss_sdl.h"
@@ -310,7 +310,7 @@ int main(int argc, char **argv)
 		kiss_button_draw(&button_cancel, renderer);
 		kiss_window_draw(&window2, renderer);
 		kiss_label_draw(&label_res, renderer);
-		kiss_pogressbar_draw(&progressbar, renderer);
+		kiss_progressbar_draw(&progressbar, renderer);
 		kiss_button_draw(&button_ok2, renderer);
 
 		SDL_RenderPresent(renderer);
