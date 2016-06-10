@@ -1,3 +1,5 @@
+#CPP = clang++
+#C = clang
 CPP = g++
 C = gcc
 
@@ -7,12 +9,12 @@ C = gcc
 -LC:\SDL2_ttf-2.0.14\i686-w64-mingw32\lib \
 -LC:\SDL2_image-2.0.1\i686-w64-mingw32\lib \
 -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf \
--mwindows -march=i686
+-mwindows -m32 -march=i686
 #CFLAGS = -IC:\SDL2-2.0.4\include \
 -IC:\SDL2-2.0.4\i686-w64-mingw32\include \
 -IC:\SDL2_ttf-2.0.14\i686-w64-mingw32\include \
 -IC:\SDL2_image-2.0.1\i686-w64-mingw32\include \
--Wall -c -std=c89 -march=i686
+-Wall -c -std=c89 -m32 -march=i686
 #EXE1 = kiss_example1.exe
 #EXE2 = kiss_example2.exe
 
@@ -23,15 +25,27 @@ C = gcc
 -LC:\SDL2_image-2.0.1\x86_64-w64-mingw32\lib \
 -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf \
 -mwindows
-#CFLAGS = -IC:\SDL2-2.0.4\include \
--IC:\SDL2-2.0.4\x86_64-w64-mingw32\include \
+#CFLAGS = -IC:\SDL2-2.0.4\x86_64-w64-mingw32\include \
 -IC:\SDL2_ttf-2.0.14\x86_64-w64-mingw32\include \
 -IC:\SDL2_image-2.0.1\x86_64-w64-mingw32\include \
 -Wall -c -std=c89
 #EXE1 = kiss_example1.exe
 #EXE2 = kiss_example2.exe
 
-### Linux, Macintosh(?)
+### Macintosh(?)
+
+#LDFLAGS = -L/Library/Frameworks/SDL2.framework \
+-L/Library/Frameworks/SDL2_ttf.framework \
+-L/Library/Frameworks/SDL2_image.framework \
+-lSDL2 -lSDL2_image -lSDL2_ttf
+#CFLAGS = -I/Library/Frameworks/SDL2.framework/Headers \
+-I/Library/Frameworks/SDL2_ttf.framework/Headers \
+-I/Library/Frameworks/SDL2_image.framework/Headers \
+-Wall -c -std=c89
+#EXE1 = kiss_example1
+#EXE2 = kiss_example2
+
+### Linux
 
 LDFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf
 CFLAGS = -Wall -c -std=c89

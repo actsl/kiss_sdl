@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 1.0.2
+  kiss_sdl version 1.0.4
 */
 
 #include "kiss_sdl.h"
@@ -68,6 +68,7 @@ int kiss_label_new(kiss_label *label, kiss_window *wdw, char *text,
 {
 	if (!label || !text) return -1;
 	label->textcolor = kiss_black;
+	label->font = kiss_textfont;
 	kiss_makerect(&label->rect, x, y, 0, 0);
 	kiss_string_copy(label->text, KISS_MAX_LABEL, text, NULL);
 	label->visible = 0;
@@ -82,7 +83,7 @@ int kiss_label_draw(kiss_label *label, SDL_Renderer *renderer)
 
 	if (label && label->wdw) label->visible = label->wdw->visible;
 	if (!label || !label->visible || !renderer) return 0;
-	y = label->rect.y + kiss_textfont.spacing / 2;
+	y = label->rect.y + label->font.spacing / 2;
 	len = strlen(label->text);
 	if (len > KISS_MAX_LABEL - 2)
 		label->text[len - 1] = '\n';
@@ -91,8 +92,8 @@ int kiss_label_draw(kiss_label *label, SDL_Renderer *renderer)
 	for (p = label->text; *p; p = strchr(p, '\n') + 1) {
 		kiss_string_copy(buf, strcspn(p, "\n") + 1, p, NULL);
 		kiss_rendertext(renderer, buf, label->rect.x, y,
-			kiss_textfont, label->textcolor);
-		y += kiss_textfont.lineheight;
+			label->font, label->textcolor);
+		y += label->font.lineheight;
 	}
 	label->text[len] = 0;
 	return 1;

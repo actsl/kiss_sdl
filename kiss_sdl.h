@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 1.0.2
+  kiss_sdl version 1.0.4
 */
 
 #ifndef _kiss_sdl_h
@@ -118,6 +118,7 @@ typedef struct kiss_label {
 	int visible;
 	char text[KISS_MAX_LABEL];
 	SDL_Color textcolor;
+	kiss_font font;
 	kiss_window *wdw;
 } kiss_label;
 
@@ -235,10 +236,6 @@ typedef struct kiss_combobox {
 	kiss_window *wdw;
 } kiss_combobox;
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 extern SDL_Color kiss_white, kiss_black, kiss_green, kiss_blue,
 		kiss_lightblue;
 extern kiss_font kiss_textfont, kiss_buttonfont;
@@ -251,6 +248,10 @@ extern int kiss_click_interval, kiss_progress_interval;
 extern int kiss_slider_padding;
 extern int kiss_border, kiss_edge;
 extern int kiss_screen_width, kiss_screen_height;
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 char *kiss_getcwd(char *buf, int size);
 int kiss_chdir(char *path);
