@@ -118,6 +118,7 @@ typedef struct kiss_label {
 	int visible;
 	char text[KISS_MAX_LABEL];
 	SDL_Color textcolor;
+	kiss_font font;
 	kiss_window *wdw;
 } kiss_label;
 
