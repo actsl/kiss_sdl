@@ -215,8 +215,9 @@ The kiss_sdl project page is https://github.com/actsl/kiss_sdl .
 CREDITS
 =======
 
-These are the people who found bugs, recommended changes, or helped
-otherwise to develop kiss_sdl, many thanks.
+Thanks to all users of kiss_sdl, start from simple, then hack the hell
+out of it. These are the people who found bugs, recommended changes,
+or helped otherwise to develop kiss_sdl, many thanks.
 
 Michael Bethke (https://2catstudios.github.io/main.html), shuttersparks.
 
