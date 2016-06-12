@@ -212,6 +212,15 @@ mingw32-make -f kiss_makefile
 The kiss_sdl project page is https://github.com/actsl/kiss_sdl .
 
 
+CREDITS
+=======
+
+These are the people who found bugs, recommended changes, or helped
+otherwise to develop kiss_sdl, many thanks.
+
+Michael Bethke (https://2catstudios.github.io/main.html), shuttersparks.
+
+
 VERSION
 =======
 
