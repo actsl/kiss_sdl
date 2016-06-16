@@ -177,14 +177,16 @@ programs are usually distributed. Or copy them to the Windows system
 directory, but then they may have to be replaced when using different
 versions of SDL2.
 
-The kiss_makefile compiles the examples that show all the widgets in the
-toolkit. The kiss_makefile was made for Linux, to use it in Windows, edit
-it, comment the lines LDFLAGS, CFLAGS, EXE1 and EXE2, and uncomment the
-corresponding lines for 32 bit Windows or 64 bit Windows. Then change the
-paths to the directories under which you installed the SDL2 development
-libraries. By default, it is assumed that the libraries are installed
-under C:\\. No change may be necessary, or the change may be simple,
-like only changing the version of the library from 2.0.4 to 2.0.6.
+The kiss_makefile compiles the examples that show all the widgets
+in the toolkit. The kiss_makefile was made for Linux, to use it in
+Windows, edit it, comment the lines LDFLAGS, CFLAGS, EXE1 and EXE2, and
+uncomment the corresponding lines for 32 bit Windows, 64 bit Windows
+or Macintosh. The Xcode command line tools also have to be installed
+standalone in Macintosh. Then change the paths to the directories under
+which you installed the SDL2 development libraries. By default, it is
+assumed that the libraries are installed under C:\\. No change may be
+necessary, or the change may be simple, like only changing the version
+of the library from 2.0.4 to 2.0.6.
 
 In Windows, this toolkit was tested with MinGW-w64, installed from the
 file i686-5.3.0-release-posix-dwarf-rt_v4-rev0.7z (extracted to C:\\
@@ -203,7 +205,8 @@ with x64.
 For compiling in Visual Studio, run kiss_example1.vcxproj or
 kiss_example2.vcxproj, make sure that on the toolbar x86 is selected
 (instead of x64), it was tested with x86, then build. Use one of the
-following commands to compile either in Linux, or in Windows using MinGW.
+following commands to compile either in Linux or Macintosh, or in Windows
+using MinGW.
 
 make -f kiss_makefile
 
@@ -219,13 +222,13 @@ Thanks to all users of kiss_sdl, start from simple, then hack the hell
 out of it. These are the people who found bugs, recommended changes,
 or helped otherwise to develop kiss_sdl, many thanks.
 
-Michael Bethke (https://2catstudios.github.io/main.html), shuttersparks.
+Michael Bethke (https://github.com/AVividLight), shuttersparks.
 
 
 VERSION
 =======
 
-1.0.4
+1.0.6
 
 
 LICENSE

@@ -1,15 +1,12 @@
 /*
   kiss_sdl widget toolkit
   Copyright (c) 2016 Tarvo Korrovits <tkorrovi@mail.com>
-
   This software is provided 'as-is', without any express or implied
   warranty. In no event will the authors be held liable for any damages
   arising from the use of this software.
-
   Permission is granted to anyone to use this software for any purpose,
   including commercial applications, and to alter it and redistribute it
   freely, subject to the following restrictions:
-
   1. The origin of this software must not be misrepresented; you must not
      claim that you wrote the original software. If you use this software
      in a product, an acknowledgment in the product documentation would
@@ -19,7 +16,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 1.0.4
+  kiss_sdl version 1.0.6
 */
 
 #ifndef _kiss_sdl_h
@@ -29,7 +26,11 @@
 #define RESDIR ""
 #endif
 
-#ifdef _MSC_VER
+#if defined(_MSC_VER)
+#include <SDL.h>
+#include <SDL_ttf.h>
+#include <SDL_image.h>
+#elif defined(__APPLE__)
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <SDL_image.h>

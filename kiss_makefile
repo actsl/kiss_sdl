@@ -32,12 +32,9 @@ C = gcc
 #EXE1 = kiss_example1.exe
 #EXE2 = kiss_example2.exe
 
-### Macintosh(?)
+### Macintosh
 
-#LDFLAGS = -L/Library/Frameworks/SDL2.framework \
--L/Library/Frameworks/SDL2_ttf.framework \
--L/Library/Frameworks/SDL2_image.framework \
--lSDL2 -lSDL2_image -lSDL2_ttf
+#LDFLAGS = -framework SDL2 -framework SDL2_ttf -framework SDL2_image
 #CFLAGS = -I/Library/Frameworks/SDL2.framework/Headers \
 -I/Library/Frameworks/SDL2_ttf.framework/Headers \
 -I/Library/Frameworks/SDL2_image.framework/Headers \

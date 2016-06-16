@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 1.0.4
+  kiss_sdl version 1.0.6
 */
 
 #include "kiss_sdl.h"
@@ -67,7 +67,10 @@ kiss_dir *kiss_opendir(char *name)
 	dir->ent.d_name = NULL;
 	strcpy(dir->name, name);
 	dir->fhandle = (ptrdiff_t) _findfirst(dir->name, &dir->fdata);
-	if ((int) dir->fhandle == -1) return NULL;
+	if ((int) dir->fhandle == -1) {
+		free (dir);
+		return NULL;
+	}
 	return dir;
 #else
 	return opendir(name);
