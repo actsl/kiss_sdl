@@ -228,7 +228,7 @@ Michael Bethke (https://github.com/AVividLight), shuttersparks.
 VERSION
 =======
 
-1.0.8
+1.0.10
 
 
 LICENSE

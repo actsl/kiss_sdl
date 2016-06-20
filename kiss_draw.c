@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 1.0.8
+  kiss_sdl version 1.0.10
 */
 
 #include "kiss_sdl.h"
@@ -179,11 +179,13 @@ SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h)
 	IMG_Init(IMG_INIT_PNG);
 	TTF_Init();
 	SDL_StartTextInput();
+	kiss_array_new(a);
 	window = SDL_CreateWindow(title, srect.w / 2 - w / 2,
 		srect.h / 2 - h / 2, w, h, SDL_WINDOW_SHOWN);
+	kiss_array_append(a, WINDOW_TYPE, window);
 	renderer = SDL_CreateRenderer(window, -1,
 		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	kiss_array_new(a);
+	kiss_array_append(a, RENDERER_TYPE, renderer);
 	font_new(&kiss_textfont, "kiss_font.ttf", a, kiss_textfont_size);
 	font_new(&kiss_buttonfont, "kiss_font.ttf", a, kiss_buttonfont_size);
 	image_new(&kiss_normal, "kiss_normal.png", a, renderer);
@@ -198,8 +200,6 @@ SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h)
 	image_new(&kiss_right, "kiss_right.png", a, renderer);
 	image_new(&kiss_selected, "kiss_selected.png", a, renderer);
 	image_new(&kiss_unselected, "kiss_unselected.png", a, renderer);
-	kiss_array_append(a, RENDERER_TYPE, renderer);
-	kiss_array_append(a, WINDOW_TYPE, window);
 	return renderer;	
 }
 
@@ -209,7 +209,7 @@ int kiss_clean(kiss_array *a)
 
 	if (!a) return -1;
 	if (a->length)
-		for (i = 0; i < a->length; i++) {
+		for (i = a->length - 1; i >= 0; i--) {
 			if (kiss_array_id(a, i) == FONT_TYPE)
 				TTF_CloseFont((TTF_Font *)
 					kiss_array_data(a, i));
