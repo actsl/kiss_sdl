@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 1.0.6
+  kiss_sdl version 1.0.8
 */
 
 #include "kiss_sdl.h"
@@ -184,8 +184,6 @@ SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h)
 	renderer = SDL_CreateRenderer(window, -1,
 		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	kiss_array_new(a);
-	kiss_array_append(a, WINDOW_TYPE, window);
-	kiss_array_append(a, RENDERER_TYPE, renderer);
 	font_new(&kiss_textfont, "kiss_font.ttf", a, kiss_textfont_size);
 	font_new(&kiss_buttonfont, "kiss_font.ttf", a, kiss_buttonfont_size);
 	image_new(&kiss_normal, "kiss_normal.png", a, renderer);
@@ -200,6 +198,8 @@ SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h)
 	image_new(&kiss_right, "kiss_right.png", a, renderer);
 	image_new(&kiss_selected, "kiss_selected.png", a, renderer);
 	image_new(&kiss_unselected, "kiss_unselected.png", a, renderer);
+	kiss_array_append(a, RENDERER_TYPE, renderer);
+	kiss_array_append(a, WINDOW_TYPE, window);
 	return renderer;	
 }
 
@@ -230,8 +230,8 @@ int kiss_clean(kiss_array *a)
 		}
 	a->length = 0;
 	kiss_array_free(a);
-	IMG_Quit();
 	TTF_Quit();
+	IMG_Quit();
 	SDL_Quit();
 	return 0;
 }

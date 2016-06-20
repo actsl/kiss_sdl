@@ -16,7 +16,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 1.0.6
+  kiss_sdl version 1.0.8
 */
 
 #ifndef _kiss_sdl_h
