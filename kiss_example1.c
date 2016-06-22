@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 1.0.10
+  kiss_sdl version 1.0.12
 */
 
 #include "kiss_sdl.h"
@@ -210,6 +210,7 @@ int main(int argc, char **argv)
 	window2_width = 400;
 	window2_height = 168;
 	renderer = kiss_init("kiss_sdl example 1", &objects, 640, 480);
+	if (!renderer) return 1;
 	kiss_array_new(&a1);
 	kiss_array_append(&objects, ARRAY_TYPE, &a1);
 	kiss_array_new(&a2);
