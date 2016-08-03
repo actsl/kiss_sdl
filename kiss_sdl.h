@@ -16,7 +16,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 1.0.12
+  kiss_sdl version 1.2.0
 */
 
 #ifndef _kiss_sdl_h
@@ -54,6 +54,7 @@
 #define KISS_MAX_LENGTH 200
 #define KISS_MIN_LENGTH 10
 #define KISS_MAX_LABEL 500
+#define KISS_MAGIC 12345
 
 enum {OTHER_TYPE, WINDOW_TYPE, RENDERER_TYPE, TEXTURE_TYPE, SURFACE_TYPE,
 	FONT_TYPE, STRING_TYPE, ARRAY_TYPE};
@@ -92,12 +93,14 @@ typedef struct kiss_array {
 
 typedef struct kiss_image {
 	SDL_Texture *image;
+	int magic;
 	int w;
 	int h;
 } kiss_image;
 
 typedef struct kiss_font {
 	TTF_Font *font;
+	int magic;
 	int fontheight;
 	int spacing;
 	int lineheight;
@@ -106,17 +109,17 @@ typedef struct kiss_font {
 } kiss_font;
 
 typedef struct kiss_window {
-	SDL_Rect rect;
 	int visible;
 	int focus;
+	SDL_Rect rect;
 	int decorate;
 	SDL_Color bg;
 	struct kiss_window *wdw;
 } kiss_window;
 
 typedef struct kiss_label {
-	SDL_Rect rect;
 	int visible;
+	SDL_Rect rect;
 	char text[KISS_MAX_LABEL];
 	SDL_Color textcolor;
 	kiss_font font;
@@ -124,23 +127,29 @@ typedef struct kiss_label {
 } kiss_label;
 
 typedef struct kiss_button {
-	SDL_Rect rect;
 	int visible;
 	int focus;
+	SDL_Rect rect;
 	int textx;
 	int texty;
 	char text[KISS_MAX_LENGTH];
 	int active;
 	int prelight;
 	SDL_Color textcolor;
+	kiss_font font;
+	kiss_image normalimg;
+	kiss_image activeimg;
+	kiss_image prelightimg;
 	kiss_window *wdw;
 } kiss_button;
 
 typedef struct kiss_selectbutton {
-	SDL_Rect rect;
 	int visible;
 	int focus;
+	SDL_Rect rect;
 	int selected;
+	kiss_image selectedimg;
+	kiss_image unselectedimg;
 	kiss_window *wdw;
 } kiss_selectbutton;
 
@@ -157,6 +166,9 @@ typedef struct kiss_vscrollbar {
 	int downclicked;
 	int upclicked;
 	int sliderclicked;
+	kiss_image up;
+	kiss_image down;
+	kiss_image vslider;
 	kiss_window *wdw;
 } kiss_vscrollbar;
 
@@ -173,12 +185,15 @@ typedef struct kiss_hscrollbar {
 	int leftclicked;
 	int rightclicked;
 	int sliderclicked;
+	kiss_image left;
+	kiss_image right;
+	kiss_image hslider;
 	kiss_window *wdw;
 } kiss_hscrollbar;
 
 typedef struct kiss_progressbar {
-	SDL_Rect rect;
 	int visible;
+	SDL_Rect rect;
 	SDL_Rect barrect;
 	int width;
 	double fraction;
@@ -186,13 +201,14 @@ typedef struct kiss_progressbar {
 	SDL_Color bg;
 	unsigned int lasttick;
 	int run;
+	kiss_image bar;
 	kiss_window *wdw;
 } kiss_progressbar;
 
 typedef struct kiss_entry {
-	SDL_Rect rect;
 	int visible;
 	int focus;
+	SDL_Rect rect;
 	int decorate;
 	int textx;
 	int texty;
@@ -204,13 +220,14 @@ typedef struct kiss_entry {
 	SDL_Color normalcolor;
 	SDL_Color activecolor;
 	SDL_Color bg;
+	kiss_font font;
 	kiss_window *wdw;
 } kiss_entry;
 
 typedef struct kiss_textbox {
-	SDL_Rect rect;
 	int visible;
 	int focus;
+	SDL_Rect rect;
 	int decorate;
 	kiss_array *array;
 	SDL_Rect textrect;
@@ -224,6 +241,7 @@ typedef struct kiss_textbox {
 	SDL_Color textcolor;
 	SDL_Color hlcolor;
 	SDL_Color bg;
+	kiss_font font;
 	kiss_window *wdw;
 } kiss_textbox;
 
@@ -234,6 +252,7 @@ typedef struct kiss_combobox {
 	kiss_window window;
 	kiss_vscrollbar vscrollbar;
 	kiss_textbox textbox;
+	kiss_image combo;
 	kiss_window *wdw;
 } kiss_combobox;
 
@@ -242,7 +261,7 @@ extern SDL_Color kiss_white, kiss_black, kiss_green, kiss_blue,
 extern kiss_font kiss_textfont, kiss_buttonfont;
 extern kiss_image kiss_normal, kiss_prelight, kiss_active, kiss_bar,
 	kiss_up, kiss_down, kiss_left, kiss_right, kiss_vslider,
-	kiss_hslider, kiss_selected, kiss_unselected;
+	kiss_hslider, kiss_selected, kiss_unselected, kiss_combo;
 extern double kiss_spacing;
 extern int kiss_textfont_size, kiss_buttonfont_size;
 extern int kiss_click_interval, kiss_progress_interval;
@@ -289,6 +308,9 @@ int kiss_rendertext(SDL_Renderer *renderer, char *text, int x, int y,
 int kiss_fillrect(SDL_Renderer *renderer, SDL_Rect *rect, SDL_Color color);
 int kiss_decorate(SDL_Renderer *renderer, SDL_Rect *rect, SDL_Color color,
 	int edge);
+int kiss_image_new(kiss_image *image, char *fname, kiss_array *a,
+	SDL_Renderer* renderer);
+int kiss_font_new(kiss_font *font, char *fname, kiss_array *a, int size);
 SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h);
 int kiss_clean(kiss_array *a);
 int kiss_window_new(kiss_window *window, kiss_window *wdw, int decorate,

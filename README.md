@@ -1,7 +1,7 @@
 NAME
 ====
 
-kiss_sdl - Simple universal GUI widget toolkit for SDL2
+kiss_sdl - Simple generic GUI widget toolkit for SDL2
 
 
 SCREENSHOTS
@@ -139,10 +139,13 @@ enables to save them directly in that way. Then with a special function
 they can be retrieved from the data in the code. But again because of
 simplicity, this has not been done in the examples of this toolkit.
 
-Can i use other colors, images, etc? Yes. To use certain other fonts or
-textures, you may have to rewrite the init function. You can also draw
-anything you like on the widgets in the drawing function, this will be
-automatically redrawn every time after the window is exposed.
+Can i use other colors, images, etc? Yes. Different widgets can have
+different fonts and images, that can be loaded after the init function
+and assigned to the widget structure before creating the widget. To
+use certain other types of fonts or images, you may have to rewrite the
+init function. You can also draw anything you like on the widgets in the
+drawing function, this will be automatically redrawn every time after
+the window is exposed.
 
 Can i do this or that other thing? You can do whatever you want, different
 from some other widget toolkits, this toolkit has not been made to
@@ -228,7 +231,7 @@ Michael Bethke (https://github.com/AVividLight), shuttersparks.
 VERSION
 =======
 
-1.0.12
+1.2.0
 
 
 LICENSE

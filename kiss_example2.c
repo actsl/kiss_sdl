@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 1.0.12
+  kiss_sdl version 1.2.0
 */
 
 #include "kiss_sdl.h"
@@ -145,12 +145,12 @@ int main(int argc, char **argv)
 	SDL_Event e;
 	kiss_array objects, a;
 	kiss_window window;
-	kiss_label label1, label2;
-	kiss_button button_ok;
-	kiss_hscrollbar hscrollbar;
-	kiss_entry entry;
-	kiss_combobox combobox;
-	kiss_selectbutton select1, select2;
+	kiss_label label1 = {0}, label2 = {0};
+	kiss_button button_ok = {0};
+	kiss_hscrollbar hscrollbar = {0};
+	kiss_entry entry = {0};
+	kiss_combobox combobox = {0};
+	kiss_selectbutton select1 = {0}, select2 = {0};
 	char stext[KISS_MAX_LENGTH];
 	int combobox_width, combobox_height, entry_width;
 	int first, draw, quit, i;

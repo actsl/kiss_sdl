@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 1.0.12
+  kiss_sdl version 1.2.0
 */
 
 #include "kiss_sdl.h"
@@ -27,7 +27,7 @@
 kiss_font kiss_textfont, kiss_buttonfont;
 kiss_image kiss_normal, kiss_prelight, kiss_active, kiss_bar,
 	kiss_up, kiss_down, kiss_left, kiss_right, kiss_vslider,
-	kiss_hslider, kiss_selected, kiss_unselected;
+	kiss_hslider, kiss_selected, kiss_unselected, kiss_combo;
 int kiss_screen_width, kiss_screen_height;
 int kiss_textfont_size = 15;
 int kiss_buttonfont_size = 12;
@@ -132,7 +132,7 @@ int kiss_decorate(SDL_Renderer *renderer, SDL_Rect *rect, SDL_Color color,
 	return 0;
 }
 
-static int image_new(kiss_image *image, char *fname, kiss_array *a,
+int kiss_image_new(kiss_image *image, char *fname, kiss_array *a,
 	SDL_Renderer* renderer)
 {
 	char buf[KISS_MAX_LENGTH];
@@ -145,10 +145,11 @@ static int image_new(kiss_image *image, char *fname, kiss_array *a,
 	}
 	if (a) kiss_array_append(a, TEXTURE_TYPE, image->image);
 	SDL_QueryTexture(image->image, NULL, NULL, &image->w, &image->h);
+	image->magic = KISS_MAGIC;
 	return 0;
 }
 
-static int font_new(kiss_font *font, char *fname, kiss_array *a, int size)
+int kiss_font_new(kiss_font *font, char *fname, kiss_array *a, int size)
 {
 	char buf[KISS_MAX_LENGTH];
 
@@ -165,6 +166,7 @@ static int font_new(kiss_font *font, char *fname, kiss_array *a, int size)
 	font->ascent = TTF_FontAscent(font->font);
 	TTF_GlyphMetrics(font->font, 'W', NULL, NULL, NULL, NULL,
 		&(font->advance));
+	font->magic = KISS_MAGIC;
 	return 0;
 }
 
@@ -194,22 +196,24 @@ SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h)
 	renderer = SDL_CreateRenderer(window, -1,
 		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (renderer) kiss_array_append(a, RENDERER_TYPE, renderer);
-	r += font_new(&kiss_textfont, "kiss_font.ttf", a,
+	r += kiss_font_new(&kiss_textfont, "kiss_font.ttf", a,
 		kiss_textfont_size);
-	r += font_new(&kiss_buttonfont, "kiss_font.ttf", a,
+	r += kiss_font_new(&kiss_buttonfont, "kiss_font.ttf", a,
 		kiss_buttonfont_size);
-	r += image_new(&kiss_normal, "kiss_normal.png", a, renderer);
-	r += image_new(&kiss_prelight, "kiss_prelight.png", a, renderer);
-	r += image_new(&kiss_active, "kiss_active.png", a, renderer);
-	r += image_new(&kiss_bar, "kiss_bar.png", a, renderer);
-	r += image_new(&kiss_vslider, "kiss_vslider.png", a, renderer);
-	r += image_new(&kiss_hslider, "kiss_hslider.png", a, renderer);
-	r += image_new(&kiss_up, "kiss_up.png", a, renderer);
-	r += image_new(&kiss_down, "kiss_down.png", a, renderer);
-	r += image_new(&kiss_left, "kiss_left.png", a, renderer);
-	r += image_new(&kiss_right, "kiss_right.png", a, renderer);
-	r += image_new(&kiss_selected, "kiss_selected.png", a, renderer);
-	r += image_new(&kiss_unselected, "kiss_unselected.png", a, renderer);
+	r += kiss_image_new(&kiss_normal, "kiss_normal.png", a, renderer);
+	r += kiss_image_new(&kiss_prelight, "kiss_prelight.png", a, renderer);
+	r += kiss_image_new(&kiss_active, "kiss_active.png", a, renderer);
+	r += kiss_image_new(&kiss_bar, "kiss_bar.png", a, renderer);
+	r += kiss_image_new(&kiss_vslider, "kiss_vslider.png", a, renderer);
+	r += kiss_image_new(&kiss_hslider, "kiss_hslider.png", a, renderer);
+	r += kiss_image_new(&kiss_up, "kiss_up.png", a, renderer);
+	r += kiss_image_new(&kiss_down, "kiss_down.png", a, renderer);
+	r += kiss_image_new(&kiss_left, "kiss_left.png", a, renderer);
+	r += kiss_image_new(&kiss_right, "kiss_right.png", a, renderer);
+	r += kiss_image_new(&kiss_combo, "kiss_combo.png", a, renderer);
+	r += kiss_image_new(&kiss_selected, "kiss_selected.png", a, renderer);
+	r += kiss_image_new(&kiss_unselected, "kiss_unselected.png", a,
+		renderer);
 	if (r) {
 		kiss_clean(a);
 		return NULL;
