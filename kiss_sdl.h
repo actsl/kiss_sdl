@@ -268,6 +268,7 @@ extern int kiss_click_interval, kiss_progress_interval;
 extern int kiss_slider_padding;
 extern int kiss_border, kiss_edge;
 extern int kiss_screen_width, kiss_screen_height;
+extern int kiss_screen_scale_factor;
 
 #ifdef __cplusplus
 extern "C" {
