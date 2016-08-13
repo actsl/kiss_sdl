@@ -29,7 +29,7 @@ kiss_image kiss_normal, kiss_prelight, kiss_active, kiss_bar,
 	kiss_up, kiss_down, kiss_left, kiss_right, kiss_vslider,
 	kiss_hslider, kiss_selected, kiss_unselected, kiss_combo;
 int kiss_screen_width, kiss_screen_height;
-int kiss_screen_scale_factor;
+int kiss_screen_scalefactor;
 int kiss_textfont_size = 15;
 int kiss_buttonfont_size = 12;
 int kiss_click_interval = 140;
@@ -196,7 +196,7 @@ SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h)
 	if (window) {
 		kiss_array_append(a, WINDOW_TYPE, window);
 		SDL_GL_GetDrawableSize (window, &kiss_screen_width, &kiss_screen_height);
-		kiss_screen_scale_factor = kiss_screen_width / w;
+		kiss_screen_scalefactor = kiss_screen_width / w;
 	}
 	renderer = SDL_CreateRenderer(window, -1,
 		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);

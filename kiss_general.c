@@ -36,8 +36,8 @@ int kiss_makerect(SDL_Rect *rect, int x, int y, int w, int h)
 
 int kiss_pointinrect(int x, int y, SDL_Rect *rect)
 {
-	return (x * kiss_screen_scale_factor) >= rect->x && (x * kiss_screen_scale_factor) < rect->x + rect->w &&
-		(y * kiss_screen_scale_factor) >= rect->y && (y * kiss_screen_scale_factor) < rect->y + rect->h;
+	return (x * kiss_screen_scalefactor) >= rect->x && (x * kiss_screen_scalefactor) < rect->x + rect->w &&
+		(y * kiss_screen_scalefactor) >= rect->y && (y * kiss_screen_scalefactor) < rect->y + rect->h;
 }
 
 int kiss_utf8next(char *str, int index)
