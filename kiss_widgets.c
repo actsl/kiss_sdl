@@ -69,6 +69,7 @@ int kiss_label_new(kiss_label *label, kiss_window *wdw, char *text,
 	if (!label || !text) return -1;
 	if (label->font.magic != KISS_MAGIC) label->font = kiss_textfont;
 	label->textcolor = kiss_black;
+	label->font = kiss_textfont;
 	kiss_makerect(&label->rect, x, y, 0, 0);
 	kiss_string_copy(label->text, KISS_MAX_LABEL, text, NULL);
 	label->visible = 0;
