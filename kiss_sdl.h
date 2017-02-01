@@ -22,6 +22,10 @@
 #ifndef _kiss_sdl_h
 #define _kiss_sdl_h
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef RESDIR
 #define RESDIR ""
 #endif
