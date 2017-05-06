@@ -248,6 +248,7 @@ int kiss_clean(kiss_array *a)
 		}
 	a->length = 0;
 	kiss_array_free(a);
+	SDL_StopTextInput();
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
