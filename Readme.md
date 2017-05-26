@@ -1,4 +1,4 @@
-This is the version of the kiss_sdl GUI widget toolkit for Android. It is a part of the project https://github.com/actsl/kiss_sdl . All source code is taken from the kiss_sdl testing branch.
+This is the version of the kiss_sdl GUI widget toolkit for Android. It is a part of the project https://github.com/actsl/kiss_sdl . All source code was taken from the kiss_sdl testing branch.
 
 Two packages need to be installed for Android, called Android SDK and Android NDK, Android SDK may now be a part of Android Studio, they are also available for the open source Replicant OS and LineageOS. Download them and put them in some directory so you know where they are. Android SDK also provides a full graphical Android emulator, which can be configured and started by running android in the tools directory. Android NDK and the tools directory of the Android SDK have to be in path, like add the following to the ~/.profile, but they will be added to path only after restarting the computer.
 
