@@ -31,29 +31,29 @@ widget toolkit, this new approach enabled to make the widget toolkit
 simpler. The toolkit is written in C, but it can also be used in C++.
 
 The widget toolkit is made as modifiable as possible, so that it will
-not stand on the way of doing what the user may want to do. The code of
-this widget toolkit is split into four files. The file kiss_widgets.c
+not stand in the way of doing what the user may want to do. The code of
+this widget toolkit is split into four files. The file `kiss_widgets.c`
 contains only the functions of the widgets, and none of the SDL functions
 or external library functions are directly called in that file. The three
 other files serve as abstraction layers, and rewriting the functions
 in some of these files, enables to redefine how the operations that
-use the external library functions, are implemented. These three files
-are kiss_draw.c , for general drawing functions, kiss_general.c , for
+use the external library functions are implemented. These three files
+are `kiss_draw.c`, for general drawing functions, `kiss_general.c`, for
 general functions such as an implementation of the variable size array,
-and kiss_posix.c , for some of the most necessary POSIX functions.
+and `kiss_posix.c`, for some of the most necessary POSIX functions.
 
 The global variables are not declared as constant, to make the code more
 easily modifiable, but they should be used as constants, by changing
 them only during the initialization. In case of an error, the functions of
-this toolkit return -1 or NULL, depending on the return type, and the
-event processing functions return 0.
+this toolkit return `-1` or `NULL`, depending on the return type, and the
+event processing functions return `0`.
 
 Every widget has three functions written for it, a function to create a
 new widget, a function to process the events, and a function to draw. The
 base functions implemented for the widgets, do all the automagical things,
 and the user can write one's own function, using a base function inside
 it, to do any additional things that the user may want to do. See the
-examples and the header file kiss_sdl.h .
+examples and the header file `kiss_sdl.h`.
 
 Widgets can be made visible and invisible, an invisible widget is also
 inactive and doesn't perform any functions. In the examples, all widgets
@@ -169,7 +169,7 @@ INSTALL
 To maintain simplicity, no library has been made, but either a static
 or a dynamic library can be made, and the path to the resources
 (images and fonts) can be defined by adding a macro definition like
--DRESDIR=\\"kiss/\\" to the compiler's command line. The simplest way
+`-DRESDIR=\\"kiss/\\"` to the compiler's command line. The simplest way
 to use it, is to copy all files to your project's directory and compile
 them with your code.
 
@@ -182,38 +182,40 @@ versions of SDL2.
 
 The kiss_makefile compiles the examples that show all the widgets
 in the toolkit. The kiss_makefile was made for Linux, to use it in
-Windows, edit it, comment the lines LDFLAGS, CFLAGS, EXE1 and EXE2, and
+Windows, edit it, comment the lines `LDFLAGS`, `CFLAGS`, `EXE1` and `EXE2`, and
 uncomment the corresponding lines for 32 bit Windows, 64 bit Windows
 or Macintosh. The Xcode command line tools also have to be installed
 standalone in Macintosh. Then change the paths to the directories under
 which you installed the SDL2 development libraries. By default, it is
-assumed that the libraries are installed under C:\\. No change may be
+assumed that the libraries are installed under `C:\\`. No change may be
 necessary, or the change may be simple, like only changing the version
 of the library from 2.0.4 to 2.0.6.
 
 In Windows, this toolkit was tested with MinGW-w64, installed from the
-file i686-5.3.0-release-posix-dwarf-rt_v4-rev0.7z (extracted to C:\\
-with C:\\mingw32\\bin added to the PATH), which is a 32 bit version of
-MinGW-w64 . Other versions of MinGW should also work, but they are not
+file `i686-5.3.0-release-posix-dwarf-rt_v4-rev0.7z` (extracted to `C:\\`
+with `C:\\mingw32\\bin` added to the PATH), which is a 32 bit version of
+`MinGW-w64`. Other versions of MinGW should also work, but they are not
 tested. A 32 bit compiler also works with 64 bit Windows, but a 64 bit
 compiler cannot be used with 32 bit Windows.
 
 It was also tested in the Visual Studio Community 2015. The project files
 for the Visual Studio are provided, but a similar changes to the library
-paths should be made if necessary, as described above, in the project ->
-properties -> configuration properties -> vc++ directories. The paths
+paths should be made if necessary, as described above, in the `project ->
+properties -> configuration properties -> vc++` directories. The paths
 of the 64 bit SDL2 libraries for x64 are entered, but it was not tested
 with x64.
 
-For compiling in Visual Studio, run kiss_example1.vcxproj or
-kiss_example2.vcxproj, make sure that on the toolbar x86 is selected
+For compiling in Visual Studio, run `kiss_example1.vcxproj` or
+`kiss_example2.vcxproj`, make sure that on the toolbar x86 is selected
 (instead of x64), it was tested with x86, then build. Use one of the
 following commands to compile either in Linux or Macintosh, or in Windows
 using MinGW.
 
+```
 make -f kiss_makefile
 
 mingw32-make -f kiss_makefile
+```
 
 The kiss_sdl project page is https://github.com/actsl/kiss_sdl .
 
