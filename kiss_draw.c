@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 1.2.0
+  kiss_sdl version 1.2.4
 */
 
 #include "kiss_sdl.h"
@@ -188,7 +188,6 @@ SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h)
 	kiss_screen_height = h;
 	IMG_Init(IMG_INIT_PNG);
 	TTF_Init();
-	SDL_StartTextInput();
 	kiss_array_new(a);
 	window = SDL_CreateWindow(title, srect.w / 2 - w / 2,
 		srect.h / 2 - h / 2, w, h, SDL_WINDOW_SHOWN);

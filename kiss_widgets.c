@@ -603,12 +603,14 @@ int kiss_entry_event(kiss_entry *entry, SDL_Event *event, int *draw)
 		kiss_pointinrect(event->button.x, event->button.y,
 		&entry->rect)) {
 		entry->active = 1;
+		SDL_StartTextInput();
 		if (entry->wdw) entry->wdw->focus = 0;
 		entry->focus = 1;
 		*draw = 1;
 	} else if (event->type == SDL_KEYDOWN && entry->active &&
 		event->key.keysym.scancode == SDL_SCANCODE_RETURN) {
 		entry->active = 0;
+		SDL_StopTextInput();
 		if (entry->wdw) entry->wdw->focus = 1;
 		entry->focus = 0;
 		*draw = 1;
@@ -834,6 +836,7 @@ int kiss_combobox_event(kiss_combobox *combobox, SDL_Event *event, int *draw)
 		combobox->window.visible = 0;
 		strcpy(combobox->text, combobox->entry.text);
 		*draw = 1;
+		SDL_StopTextInput();
 		return 1;
 	} else if (kiss_textbox_event(&combobox->textbox, event, draw)) {
 		combobox->window.visible = 0;
@@ -850,6 +853,7 @@ int kiss_combobox_event(kiss_combobox *combobox, SDL_Event *event, int *draw)
 			(char *) kiss_array_data(combobox->textbox.array,
 			index), NULL);
 		*draw = 1;
+		SDL_StopTextInput();
 		return 1;
 	}
 	return 0;
