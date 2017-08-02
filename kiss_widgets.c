@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 1.2.0
+  kiss_sdl version 1.2.4
 */
 
 #include "kiss_sdl.h"
@@ -627,6 +627,11 @@ int kiss_entry_event(kiss_entry *entry, SDL_Event *event, int *draw)
 	} else if (event->type == SDL_KEYDOWN && entry->active &&
 		(event->key.keysym.mod & KMOD_CTRL) &&
 		event->key.keysym.scancode == SDL_SCANCODE_U) {
+		strcpy(entry->text, "");
+		*draw = 1;
+	} else if (event->type == SDL_MOUSEBUTTONDOWN && entry->active &&
+		kiss_pointinrect(event->button.x, event->button.y,
+		&entry->rect)) {
 		strcpy(entry->text, "");
 		*draw = 1;
 	}

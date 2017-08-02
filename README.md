@@ -176,9 +176,10 @@ them with your code.
 The common way in Windows is to copy all the dll-s from the proper bin
 directories (or library directories when using Visual Studio) of SDL,
 SDL_image and SDL_ttf, to your project's directory, this is how SDL
-programs are usually distributed. Or copy them to the Windows system
-directory, but then they may have to be replaced when using different
-versions of SDL2.
+programs are usually distributed. Or to add all these bin directories to
+Path (in user variables). Or copy them to the Windows system directory,
+but then they may have to be replaced when using different versions
+of SDL2.
 
 The kiss_makefile compiles the examples that show all the widgets
 in the toolkit. The kiss_makefile was made for Linux, to use it in
@@ -189,21 +190,21 @@ standalone in Macintosh. Then change the paths to the directories under
 which you installed the SDL2 development libraries. By default, it is
 assumed that the libraries are installed under C:\\. No change may be
 necessary, or the change may be simple, like only changing the version
-of the library from 2.0.4 to 2.0.6.
+of the library from 2.0.5 to 2.0.6.
 
-In Windows, this toolkit was tested with MinGW-w64, installed from the
-file i686-5.3.0-release-posix-dwarf-rt_v4-rev0.7z (extracted to C:\\
-with C:\\mingw32\\bin added to the PATH), which is a 32 bit version of
-MinGW-w64 . Other versions of MinGW should also work, but they are not
+In Windows, this toolkit was tested with MinGW-w64, installed with the
+installer downloaded from https://sourceforge.net/projects/mingw-w64 for
+i686 (32 bit) to C:\\mingw-w64 , with C:\\mingw-w64\\mingw32\\bin added
+to the Path. Other versions of MinGW should also work, but they are not
 tested. A 32 bit compiler also works with 64 bit Windows, but a 64 bit
 compiler cannot be used with 32 bit Windows.
 
-It was also tested in the Visual Studio Community 2015. The project files
-for the Visual Studio are provided, but a similar changes to the library
-paths should be made if necessary, as described above, in the project ->
-properties -> configuration properties -> vc++ directories. The paths
-of the 64 bit SDL2 libraries for x64 are entered, but it was not tested
-with x64.
+It was also tested in the Visual Studio Community 2015 and SDL2 version
+2.0.4. The project files for the Visual Studio are provided, but a similar
+changes to the library paths should be made if necessary, as described
+above, in the project -> properties -> configuration properties -> vc++
+directories. The paths of the 64 bit SDL2 libraries for x64 are entered,
+but it was not tested with x64.
 
 For compiling in Visual Studio, run kiss_example1.vcxproj or
 kiss_example2.vcxproj, make sure that on the toolbar x86 is selected
@@ -231,7 +232,7 @@ Michael Bethke (https://github.com/AVividLight), shuttersparks.
 VERSION
 =======
 
-1.2.0
+1.2.4
 
 
 LICENSE
