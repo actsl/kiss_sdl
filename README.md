@@ -27,8 +27,9 @@ existing toolkits, which makes it impossible for many people to even use
 them. At that it was made universal, many simpler toolkits don't enable
 you to do many things that you want, due to their restricted internal
 design. This toolkit implements an original innovative approach for a
-widget toolkit, this new approach enabled to make the widget toolkit
-simpler. The toolkit is written in C, but it can also be used in C++.
+widget toolkit that i call principal GUI, going further from immediate
+GUI, this new approach enabled to make the widget toolkit simpler. The
+toolkit is written in C, but it can also be used in C++.
 
 The widget toolkit is made as modifiable as possible, so that it will
 not stand on the way of doing what the user may want to do. The code of
@@ -181,16 +182,15 @@ Path (in user variables). Or copy them to the Windows system directory,
 but then they may have to be replaced when using different versions
 of SDL2.
 
-The kiss_makefile compiles the examples that show all the widgets
-in the toolkit. The kiss_makefile was made for Linux, to use it in
-Windows, edit it, comment the lines LDFLAGS, CFLAGS, EXE1 and EXE2, and
-uncomment the corresponding lines for 32 bit Windows, 64 bit Windows
-or Macintosh. The Xcode command line tools also have to be installed
-standalone in Macintosh. Then change the paths to the directories under
-which you installed the SDL2 development libraries. By default, it is
-assumed that the libraries are installed under C:\\. No change may be
-necessary, or the change may be simple, like only changing the version
-of the library from 2.0.5 to 2.0.6.
+The kiss_makefile compiles the examples that show all the widgets in the
+toolkit. The kiss_makefile was made for Linux, to use it in Windows, edit
+it, comment the lines LDFLAGS, CFLAGS, EXE1 and EXE2, and uncomment the
+corresponding lines for 32 bit Windows, 64 bit Windows or macOS. The Xcode
+command line tools also have to be installed standalone in macOS. Then
+change the paths to the directories under which you installed the SDL2
+development libraries. By default, it is assumed that the libraries are
+installed under C:\\. No change may be necessary, or the change may be
+simple, like only changing the version of the library from 2.0.5 to 2.0.6.
 
 In Windows, this toolkit was tested with MinGW-w64, installed with the
 installer downloaded from https://sourceforge.net/projects/mingw-w64 for
@@ -200,7 +200,7 @@ tested. A 32 bit compiler also works with 64 bit Windows, but a 64 bit
 compiler cannot be used with 32 bit Windows.
 
 It was also tested in the Visual Studio Community 2015 and SDL2 version
-2.0.4. The project files for the Visual Studio are provided, but a similar
+2.0.5. The project files for the Visual Studio are provided, but a similar
 changes to the library paths should be made if necessary, as described
 above, in the project -> properties -> configuration properties -> vc++
 directories. The paths of the 64 bit SDL2 libraries for x64 are entered,
@@ -209,7 +209,7 @@ but it was not tested with x64.
 For compiling in Visual Studio, run kiss_example1.vcxproj or
 kiss_example2.vcxproj, make sure that on the toolbar x86 is selected
 (instead of x64), it was tested with x86, then build. Use one of the
-following commands to compile either in Linux or Macintosh, or in Windows
+following commands to compile either in Linux or macOS, or in Windows
 using MinGW.
 
 make -f kiss_makefile
@@ -232,7 +232,7 @@ Michael Bethke (https://github.com/AVividLight), shuttersparks.
 VERSION
 =======
 
-1.2.4
+1.2.6
 
 
 LICENSE
