@@ -184,7 +184,7 @@ of SDL2.
 
 The kiss_makefile compiles the examples that show all the widgets in the
 toolkit. The kiss_makefile was made for Linux, to use it in Windows, edit
-it, comment the lines LDFLAGS, CFLAGS, EXE1 and EXE2, and uncomment the
+it, comment the lines LDFLAGS, CFLAGS, BIN1 and BIN2, and uncomment the
 corresponding lines for 32 bit Windows, 64 bit Windows or macOS. The Xcode
 command line tools also have to be installed standalone in macOS. Then
 change the paths to the directories under which you installed the SDL2
