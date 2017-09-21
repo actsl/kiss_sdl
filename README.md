@@ -49,12 +49,13 @@ them only during the initialization. In case of an error, the functions of
 this toolkit return -1 or NULL, depending on the return type, and the
 event processing functions return 0.
 
-Every widget has three functions written for it, a function to create a
-new widget, a function to process the events, and a function to draw. The
-base functions implemented for the widgets, do all the automagical things,
-and the user can write one's own function, using a base function inside
-it, to do any additional things that the user may want to do. See the
-examples and the header file kiss_sdl.h .
+What is necessary for using the toolkit in a code is simple and
+straightforward. Every widget has three functions written for it,
+a function to create a new widget, a function to process the events,
+and a function to draw. The base functions implemented for the widgets,
+do all the automagical things, and the user can write one's own function,
+using a base function inside it, to do any additional things that the
+user may want to do. See the examples and the header file kiss_sdl.h .
 
 Widgets can be made visible and invisible, an invisible widget is also
 inactive and doesn't perform any functions. In the examples, all widgets
