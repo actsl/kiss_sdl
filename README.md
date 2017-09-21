@@ -16,7 +16,7 @@ DESCRIPTION
 ===========
 
 KISS is an acronym and a software development approach that means "Keep
-it short and simple". Different from other widget toolkits where one
+it small and simple". Different from other widget toolkits where one
 is supposed to choose from the existing widgets the one that fits one
 the best, in this toolkit, when there is no widget that satisfies all
 your needs, modify an existing widget, or write your own. Most other
