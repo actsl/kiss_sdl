@@ -191,7 +191,7 @@ command line tools also have to be installed standalone in macOS. Then
 change the paths to the directories under which you installed the SDL2
 development libraries. By default, it is assumed that the libraries are
 installed under C:\\. No change may be necessary, or the change may be
-simple, like only changing the version of the library from 2.0.5 to 2.0.6.
+simple, like only changing the version of the library from 2.0.6 to 2.0.7.
 
 In Windows, this toolkit was tested with MinGW-w64, installed with the
 installer downloaded from https://sourceforge.net/projects/mingw-w64 for
@@ -201,7 +201,7 @@ tested. A 32 bit compiler also works with 64 bit Windows, but a 64 bit
 compiler cannot be used with 32 bit Windows.
 
 It was also tested in the Visual Studio Community 2015 and SDL2 version
-2.0.5. The project files for the Visual Studio are provided, but a similar
+2.0.6. The project files for the Visual Studio are provided, but a similar
 changes to the library paths should be made if necessary, as described
 above, in the project -> properties -> configuration properties -> vc++
 directories. The paths of the 64 bit SDL2 libraries for x64 are entered,
@@ -233,7 +233,7 @@ Michael Bethke (https://github.com/AVividLight), shuttersparks.
 VERSION
 =======
 
-1.2.6
+1.2.8
 
 
 LICENSE
