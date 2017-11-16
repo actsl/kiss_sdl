@@ -65,24 +65,24 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>.</OutDir>
-    <IncludePath>C:\SDL2-2.0.6\include;C:\SDL2_ttf-2.0.14\include;C:\SDL2_image-2.0.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\SDL2-2.0.6\lib\x86;C:\SDL2_ttf-2.0.14\lib\x86;C:\SDL2_image-2.0.1\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\SDL2-2.0.7\include;C:\SDL2_ttf-2.0.14\include;C:\SDL2_image-2.0.2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\SDL2-2.0.7\lib\x86;C:\SDL2_ttf-2.0.14\lib\x86;C:\SDL2_image-2.0.2\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>.</OutDir>
-    <IncludePath>C:\SDL2-2.0.6\include;C:\SDL2_ttf-2.0.14\include;C:\SDL2_image-2.0.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\SDL2-2.0.6\lib\x86;C:\SDL2_ttf-2.0.14\lib\x86;C:\SDL2_image-2.0.1\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\SDL2-2.0.7\include;C:\SDL2_ttf-2.0.14\include;C:\SDL2_image-2.0.2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\SDL2-2.0.7\lib\x86;C:\SDL2_ttf-2.0.14\lib\x86;C:\SDL2_image-2.0.2\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>.</OutDir>
-    <IncludePath>C:\SDL2-2.0.6\include;C:\SDL2_ttf-2.0.14\include;C:\SDL2_image-2.0.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\SDL2-2.0.6\lib\x64;C:\SDL2_ttf-2.0.14\lib\x64;C:\SDL2_image-2.0.1\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\SDL2-2.0.7\include;C:\SDL2_ttf-2.0.14\include;C:\SDL2_image-2.0.2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\SDL2-2.0.7\lib\x64;C:\SDL2_ttf-2.0.14\lib\x64;C:\SDL2_image-2.0.2\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>.</OutDir>
-    <IncludePath>C:\SDL2-2.0.6\include;C:\SDL2_ttf-2.0.14\include;C:\SDL2_image-2.0.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\SDL2-2.0.6\lib\x64;C:\SDL2_ttf-2.0.14\lib\x64;C:\SDL2_image-2.0.1\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\SDL2-2.0.7\include;C:\SDL2_ttf-2.0.14\include;C:\SDL2_image-2.0.2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\SDL2-2.0.7\lib\x64;C:\SDL2_ttf-2.0.14\lib\x64;C:\SDL2_image-2.0.2\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

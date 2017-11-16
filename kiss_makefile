@@ -5,30 +5,30 @@ C = gcc
 
 ### 32 bit Windows
 
-#LDFLAGS = -LC:\SDL2-2.0.6\i686-w64-mingw32\lib \
+#LDFLAGS = -LC:\SDL2-2.0.7\i686-w64-mingw32\lib \
 -LC:\SDL2_ttf-2.0.14\i686-w64-mingw32\lib \
--LC:\SDL2_image-2.0.1\i686-w64-mingw32\lib \
+-LC:\SDL2_image-2.0.2\i686-w64-mingw32\lib \
 -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf \
 -mwindows -m32 -march=i686
-#CFLAGS = -IC:\SDL2-2.0.6\i686-w64-mingw32\include \
--IC:\SDL2-2.0.6\i686-w64-mingw32\include\SDL2 \
+#CFLAGS = -IC:\SDL2-2.0.7\i686-w64-mingw32\include \
+-IC:\SDL2-2.0.7\i686-w64-mingw32\include\SDL2 \
 -IC:\SDL2_ttf-2.0.14\i686-w64-mingw32\include \
--IC:\SDL2_image-2.0.1\i686-w64-mingw32\include \
+-IC:\SDL2_image-2.0.2\i686-w64-mingw32\include \
 -Wall -c -std=c89 -m32 -march=i686
 #BIN1 = kiss_example1.exe
 #BIN2 = kiss_example2.exe
 
 ### 64 bit Windows
 
-#LDFLAGS = -LC:\SDL2-2.0.6\x86_64-w64-mingw32\lib \
+#LDFLAGS = -LC:\SDL2-2.0.7\x86_64-w64-mingw32\lib \
 -LC:\SDL2_ttf-2.0.14\x86_64-w64-mingw32\lib \
--LC:\SDL2_image-2.0.1\x86_64-w64-mingw32\lib \
+-LC:\SDL2_image-2.0.2\x86_64-w64-mingw32\lib \
 -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf \
 -mwindows
-#CFLAGS = -IC:\SDL2-2.0.6\x86_64-w64-mingw32\include \
--IC:\SDL2-2.0.6\x86_64-w64-mingw32\include\SDL2 \
+#CFLAGS = -IC:\SDL2-2.0.7\x86_64-w64-mingw32\include \
+-IC:\SDL2-2.0.7\x86_64-w64-mingw32\include\SDL2 \
 -IC:\SDL2_ttf-2.0.14\x86_64-w64-mingw32\include \
--IC:\SDL2_image-2.0.1\x86_64-w64-mingw32\include \
+-IC:\SDL2_image-2.0.2\x86_64-w64-mingw32\include \
 -Wall -c -std=c89
 #BIN1 = kiss_example1.exe
 #BIN2 = kiss_example2.exe

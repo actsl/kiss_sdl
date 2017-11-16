@@ -177,11 +177,11 @@ them with your code.
 
 The common way in Windows is to copy all the dll-s from the proper bin
 directories (or library directories when using Visual Studio) of SDL,
-SDL_image and SDL_ttf, to your project's directory, this is how SDL
-programs are usually distributed. Or to add all these bin directories to
-Path (in user variables). Or copy them to the Windows system directory,
-but then they may have to be replaced when using different versions
-of SDL2.
+SDL_image and SDL_ttf, to your project's directory (copy the duplicate
+files from SDL_image, not from SDL_ttf), this is how SDL programs are
+usually distributed. Or to add all these bin directories to Path (in
+user variables). Or copy them to the Windows system directory, but then
+they may have to be replaced when using different versions of SDL2.
 
 The kiss_makefile compiles the examples that show all the widgets in the
 toolkit. The kiss_makefile was made for Linux, to use it in Windows, edit
@@ -191,7 +191,7 @@ command line tools also have to be installed standalone in macOS. Then
 change the paths to the directories under which you installed the SDL2
 development libraries. By default, it is assumed that the libraries are
 installed under C:\\. No change may be necessary, or the change may be
-simple, like only changing the version of the library from 2.0.6 to 2.0.7.
+simple, like only changing the version of the library from 2.0.7 to 2.0.8.
 
 In Windows, this toolkit was tested with MinGW-w64, installed with the
 installer downloaded from https://sourceforge.net/projects/mingw-w64 for
@@ -201,7 +201,7 @@ tested. A 32 bit compiler also works with 64 bit Windows, but a 64 bit
 compiler cannot be used with 32 bit Windows.
 
 It was also tested in the Visual Studio Community 2015 and SDL2 version
-2.0.5. The project files for the Visual Studio are provided, but a similar
+2.0.7. The project files for the Visual Studio are provided, but a similar
 changes to the library paths should be made if necessary, as described
 above, in the project -> properties -> configuration properties -> vc++
 directories. The paths of the 64 bit SDL2 libraries for x64 are entered,
@@ -227,7 +227,7 @@ Thanks to all users of kiss_sdl, start from simple, then hack the hell
 out of it. These are the people who found bugs, recommended changes,
 or helped otherwise to develop kiss_sdl, many thanks.
 
-Michael Bethke (https://github.com/AVividLight), shuttersparks.
+Michael Bethke (https://github.com/AVividLight), solarHunter.
 
 
 VERSION
