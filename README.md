@@ -15,16 +15,18 @@ SCREENSHOTS
 DESCRIPTION
 ===========
 
-KISS is an acronym and a software development approach that means "Keep
-it small and simple". Different from other widget toolkits where one
-is supposed to choose from the existing widgets the one that fits one
-the best, in this toolkit, when there is no widget that satisfies all
-your needs, modify an existing widget, or write your own. Most other
-toolkits enable to write your own widgets, but it is not simple to do
-that, and they are not intended for that. The toolkit was made as simple
-as possible, to solve the problem of an immense complexity of most of the
+KISS is an acronym and software development approach that means "Keep
+It Small and Simple". Sometimes all the user interaction is GUI, so
+GUI is very general. Certainly there are immense number of ways how a
+developer may want to do it. Having everything ready made is thus not a
+good idea, except for some special cases. The solution is to make GUI
+toolkit general, but small and simple, so that for basic purposes it
+can be used as is, or changed when one wants to do it differently. Most
+other toolkits enable to write your own widgets, but it is not simple
+to do that, and they are not intended for that. This toolkit was made as
+simple as possible, to solve the problem of an immense complexity of many
 existing toolkits, which makes it impossible for many people to even use
-them. At that it was made universal, many simpler toolkits don't enable
+them. At that it was made general, many simpler toolkits don't enable
 you to do many things that you want, due to their restricted internal
 design. This toolkit implements an original innovative approach for a
 widget toolkit that i call principal GUI, going further from immediate
