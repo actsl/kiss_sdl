@@ -35,7 +35,7 @@ going further from immediate GUI, this new approach enabled to make the
 widget toolkit simpler. The toolkit is written in C, but it can also be
 used in C++.
 
-The GUI toolkit is made as modifiable as possible, so that it will not
+The GUI toolkit was made as modifiable as possible, so that it will not
 stand on the way of doing what the user may want to do. The code of this
 GUI toolkit is split into four files. The file kiss_widgets.c contains
 only the functions of the widgets, and none of the SDL functions or
