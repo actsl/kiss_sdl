@@ -16,8 +16,8 @@ DESCRIPTION
 ===========
 
 KISS is an acronym and software development approach that means "Keep
-It Small and Simple". Sometimes all the user interaction is GUI, so
-GUI is very general. Certainly there are immense number of ways how a
+It Small and Simple". Sometimes all the user interaction is GUI, so GUI
+is very general. Certainly there are an immense number of ways how a
 developer may want to do it. Having everything ready made is thus not a
 good idea, except for some special cases. The solution is to make GUI
 toolkit general, but small and simple, so that for basic purposes it
@@ -33,11 +33,11 @@ widget toolkit that i call principal GUI, going further from immediate
 GUI, this new approach enabled to make the widget toolkit simpler. The
 toolkit is written in C, but it can also be used in C++.
 
-The widget toolkit is made as modifiable as possible, so that it will
-not stand on the way of doing what the user may want to do. The code of
-this widget toolkit is split into four files. The file kiss_widgets.c
-contains only the functions of the widgets, and none of the SDL functions
-or external library functions are directly called in that file. The three
+The GUI toolkit is made as modifiable as possible, so that it will not
+stand on the way of doing what the user may want to do. The code of this
+GUI toolkit is split into four files. The file kiss_widgets.c contains
+only the functions of the widgets, and none of the SDL functions or
+external library functions are directly called in that file. The three
 other files serve as abstraction layers, and rewriting the functions
 in some of these files, enables to redefine how the operations that
 use the external library functions, are implemented. These three files
@@ -229,7 +229,7 @@ Thanks to all users of kiss_sdl, start from simple, then hack the hell
 out of it. These are the people who found bugs, recommended changes,
 or helped otherwise to develop kiss_sdl, many thanks.
 
-Michael Bethke (https://github.com/AVividLight), solarHunter.
+Michael Bethke (https://github.com/AVividLight), solarHunter (https://github.com/solarHunter).
 
 
 VERSION
