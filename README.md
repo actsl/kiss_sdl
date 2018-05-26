@@ -195,7 +195,7 @@ command line tools also have to be installed standalone in macOS. Then
 change the paths to the directories under which you installed the SDL2
 development libraries. By default, it is assumed that the libraries are
 installed under C:\\. No change may be necessary, or the change may be
-simple, like only changing the version of the library from 2.0.7 to 2.0.8.
+simple, like only changing the version of the library from 2.0.8 to 2.0.9.
 
 In Windows, this toolkit was tested with MinGW-w64, installed with the
 installer downloaded from https://sourceforge.net/projects/mingw-w64 for
@@ -237,7 +237,7 @@ Michael Bethke (https://github.com/AVividLight), solarHunter (https://github.com
 VERSION
 =======
 
-1.2.10
+1.2.12
 
 
 LICENSE
