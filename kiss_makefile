@@ -43,6 +43,14 @@ C = gcc
 #BIN1 = kiss_example1
 #BIN2 = kiss_example2
 
+### pkg-config version for Linux & Windows with good PATH environment variable
+
+#PKGS = SDL2 SDL2_image SDL2_ttf
+#LDFLAGS = $(shell pkg-config --libs $(PKGS))
+#CFLAGS = -Wall -c -std=c89 $(shell pkg-config --cflags $(PKGS))
+#BIN1 = kiss_example1
+#BIN2 = kiss_example2
+
 ### Linux
 
 LDFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf
