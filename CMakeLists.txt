@@ -21,7 +21,7 @@ pkg_search_module(SDL2_TTF REQUIRED SDL2_ttf)
 pkg_search_module(SDL2_IMAGE REQUIRED SDL2_image)
 
 ################################################################################
-# kiss_sdl2
+# SDL2_kiss
 ################################################################################
 set(SOURCE_FILES
     "include/SDL2/SDL_kiss.h"

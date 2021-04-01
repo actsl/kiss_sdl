@@ -1,5 +1,5 @@
 /*
-  kiss_sdl widget toolkit
+  SDL2_kiss widget toolkit
   Copyright (c) 2016 Tarvo Korrovits <tkorrovi@mail.com>
 
   This software is provided 'as-is', without any express or implied
@@ -19,7 +19,7 @@
   3. This notice may not be removed or altered from any source
      distribution.
 
-  kiss_sdl version 1.2.0
+  SDL2_kiss version 1.2.12
 */
 
 #include "SDL2/SDL_kiss.h"
@@ -210,7 +210,7 @@ int main(int argc, char **argv)
 	textbox_height = 250;
 	window2_width = 400;
 	window2_height = 168;
-	renderer = kiss_init("kiss_sdl example 1", &objects, 640, 480);
+	renderer = kiss_init("SDL2_kiss example 1", &objects, 640, 480);
 	if (!renderer) return 1;
 	kiss_array_new(&a1);
 	kiss_array_append(&objects, ARRAY_TYPE, &a1);
