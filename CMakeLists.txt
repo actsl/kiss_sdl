@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.19)
 
 project(SDL2_kiss LANGUAGES C CXX)
 
-set(PROJECT_VERSION 1.0)
+set(PROJECT_VERSION 1.2.12)
 set(PROJECT_DESCRIPTION "Simple generic GUI widget toolkit for SDL2")
 
 include (GNUInstallDirs)
