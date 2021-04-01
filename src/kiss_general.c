@@ -22,7 +22,7 @@
   kiss_sdl version 1.2.0
 */
 
-#include "kiss_sdl.h"
+#include "SDL2/SDL_kiss.h"
 
 int kiss_makerect(SDL_Rect *rect, int x, int y, int w, int h)
 {

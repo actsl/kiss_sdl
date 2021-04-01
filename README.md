@@ -1,7 +1,7 @@
 NAME
 ====
 
-kiss_sdl - Simple generic GUI widget toolkit for SDL2
+SDL2_kiss - Simple generic GUI widget toolkit for SDL2
 
 
 SCREENSHOTS
@@ -160,7 +160,7 @@ or what you can do. Just learn the basic things about how it works,
 the toolkit is simple and thus not difficult to learn, but it would be
 difficult to do what you want otherwise.
 
-kiss_sdl is fully capable of UTF-8 (8-bit Unicode). The rendered text,
+SDL2_kiss is fully capable of UTF-8 (8-bit Unicode). The rendered text,
 the keyboard input and also the C source code, all is in UTF-8.
 
 The kiss_sdl manual, including the full reference, Hello World example
@@ -217,11 +217,13 @@ kiss_example2.vcxproj, make sure that on the toolbar x86 is selected
 following commands to compile either in Linux or macOS, or in Windows
 using MinGW.
 
-make -f kiss_makefile
+cmake . -G <Makefile style>
 
-mingw32-make -f kiss_makefile
+make
 
-The kiss_sdl project page is https://github.com/actsl/kiss_sdl .
+make install
+
+The SDL2_kiss project page is https://github.com/actsl/kiss_sdl .
 
 
 CREDITS

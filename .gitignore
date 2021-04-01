@@ -1,0 +1,10 @@
+*.cmake
+*.pc
+Makefile
+CMakeFiles/
+CMakeCache.txt
+install_manifest.txt
+kiss_example1
+kiss_example2
+*.a
+*.so

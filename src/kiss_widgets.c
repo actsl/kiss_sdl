@@ -22,7 +22,7 @@
   kiss_sdl version 1.2.4
 */
 
-#include "kiss_sdl.h"
+#include "SDL2/SDL_kiss.h"
 
 int kiss_window_new(kiss_window *window, kiss_window *wdw, int decorate,
 	int x, int y, int w, int h)

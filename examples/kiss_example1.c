@@ -22,7 +22,7 @@
   kiss_sdl version 1.2.0
 */
 
-#include "kiss_sdl.h"
+#include "SDL2/SDL_kiss.h"
 
 static void text_reset(kiss_textbox *textbox, kiss_vscrollbar *vscrollbar)
 {
