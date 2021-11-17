@@ -170,14 +170,15 @@ int kiss_font_new(kiss_font *font, char *fname, kiss_array *a, int size)
 	return 0;
 }
 
+//NOTE this automatically starts sdl and quits it if an error occurs
 SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h)
 {
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 	SDL_Rect srect;
-	int r;
-
-	r = 0;
+	int r = 0;
+	
+	//Init all the sdl stuff
 	SDL_Init(SDL_INIT_EVERYTHING);
 	SDL_GetDisplayBounds(0, &srect);
 	if (!a || w > srect.w || h > srect.h) {
@@ -189,6 +190,8 @@ SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h)
 	IMG_Init(IMG_INIT_PNG);
 	TTF_Init();
 	kiss_array_new(a);
+	
+	//Now for the window
 	window = SDL_CreateWindow(title, srect.w / 2 - w / 2,
 		srect.h / 2 - h / 2, w, h, SDL_WINDOW_SHOWN);
 	if (window) kiss_array_append(a, WINDOW_TYPE, window);
@@ -216,6 +219,50 @@ SDL_Renderer* kiss_init(char* title, kiss_array *a, int w, int h)
 	if (r) {
 		kiss_clean(a);
 		return NULL;
+	}
+	return renderer;	
+}
+
+//init kiss ontop of an already initlised sdl, sdl img, sdl ttf, window and render
+//returns 0 if things worked and -1 if not
+int kiss_init_over(SDL_Window *window, SDL_Renderer *renderer, kiss_array *a)
+{
+	if (!window || !renderer) {
+		return -1; //The pointers to the window or renderer ain't right
+	}
+	if(SDL_WasInit(SDL_INIT_EVERYTHING) < 0){
+		//you have to init SDL first
+		return -1;
+	}
+	
+	kiss_array_new(a);
+	int r = 0;
+	
+	kiss_array_append(a, WINDOW_TYPE, window);
+	SDL_GetWindowSize(window, &kiss_screen_width, &kiss_screen_height);
+	kiss_array_append(a, RENDERER_TYPE, renderer);
+	
+	r += kiss_font_new(&kiss_textfont, "kiss_font.ttf", a,
+		kiss_textfont_size);
+	r += kiss_font_new(&kiss_buttonfont, "kiss_font.ttf", a,
+		kiss_buttonfont_size);
+	r += kiss_image_new(&kiss_normal, "kiss_normal.png", a, renderer);
+	r += kiss_image_new(&kiss_prelight, "kiss_prelight.png", a, renderer);
+	r += kiss_image_new(&kiss_active, "kiss_active.png", a, renderer);
+	r += kiss_image_new(&kiss_bar, "kiss_bar.png", a, renderer);
+	r += kiss_image_new(&kiss_vslider, "kiss_vslider.png", a, renderer);
+	r += kiss_image_new(&kiss_hslider, "kiss_hslider.png", a, renderer);
+	r += kiss_image_new(&kiss_up, "kiss_up.png", a, renderer);
+	r += kiss_image_new(&kiss_down, "kiss_down.png", a, renderer);
+	r += kiss_image_new(&kiss_left, "kiss_left.png", a, renderer);
+	r += kiss_image_new(&kiss_right, "kiss_right.png", a, renderer);
+	r += kiss_image_new(&kiss_combo, "kiss_combo.png", a, renderer);
+	r += kiss_image_new(&kiss_selected, "kiss_selected.png", a, renderer);
+	r += kiss_image_new(&kiss_unselected, "kiss_unselected.png", a,
+		renderer);
+	if (r) {
+		kiss_clean(a);
+		return -1;
 	}
 	return renderer;	
 }
