@@ -204,7 +204,7 @@ to the Path. Other versions of MinGW should also work, but they are not
 tested. A 32 bit compiler also works with 64 bit Windows, but a 64 bit
 compiler cannot be used with 32 bit Windows.
 
-It was also tested in the Visual Studio Community 2015 and SDL2 version
+It was also tested in the Visual Studio Community 2015 (and 2019) and SDL2 version
 2.0.7. The project files for the Visual Studio are provided, but a similar
 changes to the library paths should be made if necessary, as described
 above, in the project -> properties -> configuration properties -> vc++
